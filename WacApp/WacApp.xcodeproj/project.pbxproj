@@ -7,24 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9DC96B4224577317007F4DD1 /* WacSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC96B4124577317007F4DD1 /* WacSDK.framework */; };
+		9DC96B4324577317007F4DD1 /* WacSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC96B4124577317007F4DD1 /* WacSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B36208362453CE7800D6A566 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36208352453CE7800D6A566 /* AppDelegate.swift */; };
 		B36208382453CE7800D6A566 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36208372453CE7800D6A566 /* SceneDelegate.swift */; };
 		B362083A2453CE7800D6A566 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36208392453CE7800D6A566 /* ViewController.swift */; };
 		B362083D2453CE7800D6A566 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B362083B2453CE7800D6A566 /* Main.storyboard */; };
 		B362083F2453CE7A00D6A566 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B362083E2453CE7A00D6A566 /* Assets.xcassets */; };
 		B36208422453CE7A00D6A566 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B36208402453CE7A00D6A566 /* LaunchScreen.storyboard */; };
-		B36208A42455E87A00D6A566 /* WacSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B36208A2245550C000D6A566 /* WacSDK.framework */; };
-		B36208A52455E87A00D6A566 /* WacSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B36208A2245550C000D6A566 /* WacSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		B362089F2455414100D6A566 /* Embed Frameworks */ = {
+		9DC96B4424577317007F4DD1 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B36208A52455E87A00D6A566 /* WacSDK.framework in Embed Frameworks */,
+				9DC96B4324577317007F4DD1 /* WacSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -32,6 +32,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9DC96B3E2457723C007F4DD1 /* WacSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WacSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DC96B4124577317007F4DD1 /* WacSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WacSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B36208322453CE7800D6A566 /* WacApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WacApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B36208352453CE7800D6A566 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B36208372453CE7800D6A566 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,7 +42,6 @@
 		B362083E2453CE7A00D6A566 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B36208412453CE7A00D6A566 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B36208432453CE7A00D6A566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B36208A2245550C000D6A566 /* WacSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WacSDK.framework; path = "../../WacSDK/build/Products/Release-iphoneos/WacSDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B36208A42455E87A00D6A566 /* WacSDK.framework in Frameworks */,
+				9DC96B4224577317007F4DD1 /* WacSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +90,8 @@
 		B36208572453CEB200D6A566 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B36208A2245550C000D6A566 /* WacSDK.framework */,
+				9DC96B4124577317007F4DD1 /* WacSDK.framework */,
+				9DC96B3E2457723C007F4DD1 /* WacSDK.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -105,7 +107,7 @@
 				B362082F2453CE7800D6A566 /* Frameworks */,
 				B36208302453CE7800D6A566 /* Resources */,
 				B362085E2453CF6A00D6A566 /* Carthage (Copy Frameworks) */,
-				B362089F2455414100D6A566 /* Embed Frameworks */,
+				9DC96B4424577317007F4DD1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
