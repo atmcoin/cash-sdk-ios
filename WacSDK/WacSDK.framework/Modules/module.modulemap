@@ -1,0 +1,11 @@
+framework module WacSDK {
+  umbrella header "WacSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module WacSDK.Swift {
+    header "WacSDK-Swift.h"
+    requires objc
+}
