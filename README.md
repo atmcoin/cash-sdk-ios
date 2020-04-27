@@ -17,7 +17,7 @@ Available Schemes:
   - Copy the `WacSDK.framework` to your swift app under `Frameworks` as Embedded
   
   <p align="center">
-    <img src="Drag_Framework.png" alt="Drag Framework" width="450px"/>
+    <img src="Drag_Framework.png" alt="Drag Framework" width="600px"/>
   <p/>
 
 
@@ -25,7 +25,7 @@ Available Schemes:
   - WAC SDK has a dependency on 2 frameworks: AlamoFire and PromiseKit. These dependencies are linked to inside of the WAC Framework to avoid symbol collisions if your project uses them. To avoid a linker error at compile time, your App will need to embed them somehow. This is where Carthage comes to the rescue: Use `Carthage copy-frameworks` functionality, specifying the location where your Carthage builds are (i.e. `$(SRCROOT)/../Cartahge/Build/iOS/Alamofire.framework`) and the path where to copy to (i.e. `$(BUILD_PRODUCT_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework`)
   
   <p align="center">
-    <img src="Carthage_Copy_Frameworks.png" alt="Carthage_Copy_Frameworks" width="450px"/>
+    <img src="Carthage_Copy_Frameworks.png" alt="Carthage_Copy_Frameworks" width="600px"/>
   <p/>
  
 - :crystal_ball: WacApp - Demo app that shows hot to use the APIs.
