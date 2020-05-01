@@ -13,7 +13,7 @@ public protocol SessionCallback {
     func onError(_ errorMessage: String?)
 }
 
-open class WAC: NSObject {
+open class WAC: WacProtocol  {
     var baseURL: String
     public var sessionKey: String = ""
 
@@ -116,10 +116,23 @@ open class WAC: NSObject {
             print(error.localizedDescription)
         }
     }
-    
-    public func sendVerificationCode(_ firstName: String, _ lastName: String, phoneNumber: String = "", email: String = "", completion: @escaping (SendVerificationCodeResponse) -> ()) {
-        var params = ["first_name": firstName, "last_name": lastName, "phone_number": phoneNumber, "email": email]
-        params.merge(sessionKeyParam, uniquingKeysWith: { $1})
+  
+    public func sendVerificationCode(_ firstName: String, _ lastName: String, phoneNumber: String?, email: String?, completion: @escaping (SendVerificationCodeResponse) -> ()) throws {
+        var params = ["first_name": firstName, "last_name": lastName]
+      
+        if let phoneNumber = phoneNumber, !phoneNumber.isEmpty {
+            params["phoneNumber"] = phoneNumber
+        }
+        
+        if let email = email, !email.isEmpty {
+             params["email"] = email
+        }
+        
+        if (params["email"] != nil && params["phoneNumber"] != nil) {
+          throw InvalidParamsError("Send verication code requires either email or phoneNumber, both are nil.")
+        }
+       
+        params.merge(sessionKeyParam, uniquingKeysWith: {$1})
         Request().request(.sendVerificationCode,
                           parameters: params,
                           headers: defaultHeader)
