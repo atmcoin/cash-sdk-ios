@@ -27,7 +27,7 @@
 		B36207E22452A2BE00D6A566 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36207E12452A2BE00D6A566 /* Request.swift */; };
 		B36207F92452B18800D6A566 /* ATMListResponde.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36207F82452B18800D6A566 /* ATMListResponde.swift */; };
 		B36207FD2452B70D00D6A566 /* CashCodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36207FC2452B70D00D6A566 /* CashCodeResponse.swift */; };
-		B36207FF2452B9AF00D6A566 /* CodeStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36207FE2452B9AF00D6A566 /* CodeStatusResponse.swift */; };
+		B36207FF2452B9AF00D6A566 /* CashCodeStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36207FE2452B9AF00D6A566 /* CashCodeStatusResponse.swift */; };
 		B36208012452C39600D6A566 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36208002452C39600D6A566 /* LoginResponse.swift */; };
 		B36208032452C40D00D6A566 /* WacError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36208022452C40D00D6A566 /* WacError.swift */; };
 		B36208212453654E00D6A566 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B362081F2453654E00D6A566 /* PromiseKit.framework */; };
@@ -43,7 +43,7 @@
 		B36207E12452A2BE00D6A566 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		B36207F82452B18800D6A566 /* ATMListResponde.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMListResponde.swift; sourceTree = "<group>"; };
 		B36207FC2452B70D00D6A566 /* CashCodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashCodeResponse.swift; sourceTree = "<group>"; };
-		B36207FE2452B9AF00D6A566 /* CodeStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeStatusResponse.swift; sourceTree = "<group>"; };
+		B36207FE2452B9AF00D6A566 /* CashCodeStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashCodeStatusResponse.swift; sourceTree = "<group>"; };
 		B36208002452C39600D6A566 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		B36208022452C40D00D6A566 /* WacError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WacError.swift; sourceTree = "<group>"; };
 		B362081F2453654E00D6A566 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = ../Vendor/Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 			children = (
 				B36207F82452B18800D6A566 /* ATMListResponde.swift */,
 				B36207FC2452B70D00D6A566 /* CashCodeResponse.swift */,
-				B36207FE2452B9AF00D6A566 /* CodeStatusResponse.swift */,
+				B36207FE2452B9AF00D6A566 /* CashCodeStatusResponse.swift */,
 				B36208002452C39600D6A566 /* LoginResponse.swift */,
 				B36208022452C40D00D6A566 /* WacError.swift */,
 			);
@@ -219,7 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B36207D02452933F00D6A566 /* WAC.swift in Sources */,
-				B36207FF2452B9AF00D6A566 /* CodeStatusResponse.swift in Sources */,
+				B36207FF2452B9AF00D6A566 /* CashCodeStatusResponse.swift in Sources */,
 				B36207E22452A2BE00D6A566 /* Request.swift in Sources */,
 				B36207F92452B18800D6A566 /* ATMListResponde.swift in Sources */,
 				B36207FD2452B70D00D6A566 /* CashCodeResponse.swift in Sources */,

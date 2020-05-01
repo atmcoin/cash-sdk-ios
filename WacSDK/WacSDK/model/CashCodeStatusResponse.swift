@@ -1,7 +1,7 @@
 
 import Foundation
 
-public struct CodeStatusResponse: Codable {
+public struct CashCodeStatusResponse: Codable {
     public let result: String
     public let error: WacError?
     public let data: CodeStatusItems?
