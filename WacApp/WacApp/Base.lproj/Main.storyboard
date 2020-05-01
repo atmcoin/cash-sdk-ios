@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NEC-JO-pH9">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,16 +25,16 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H6F-Iw-fwX" userLabel="Login View">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHg-zT-ySa">
-                                                        <rect key="frame" x="20" y="20" width="50" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHg-zT-ySa">
+                                                        <rect key="frame" x="20" y="20" width="115" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="32" id="kJt-FM-2dF"/>
                                                             <constraint firstAttribute="width" constant="50" placeholder="YES" id="tpc-3T-Fwm"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                        <state key="normal" title="Login"/>
+                                                        <state key="normal" title="Create Session"/>
                                                         <connections>
-                                                            <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ulk-R3-47t"/>
+                                                            <action selector="createSession:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ulk-R3-47t"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2w6-xO-dxw">
@@ -314,7 +315,7 @@
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                         <state key="normal" title="Send"/>
                                                         <connections>
-                                                            <action selector="createCode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dXH-ta-jVe"/>
+                                                            <action selector="createCashCode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dXH-ta-jVe"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -460,7 +461,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1960.8695652173915" y="137.94642857142856"/>
+            <point key="canvasLocation" x="1960" y="137.6311844077961"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ndl-qz-zRa">
