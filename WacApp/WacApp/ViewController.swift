@@ -108,7 +108,7 @@ class ViewController: UIViewController, SessionCallback {
     }
     
     @IBAction func sendVerificationCode(_ sender: Any) {
-        client?.sendVerificationCode(firstNameTextField.text!, self.lastNameTextField.text!, phoneNumber: self.telephoneTextField.text!, email: self.emailTextField.text!, completion: { (response: SendVerificationCodeResponse) in
+        try?client?.sendVerificationCode(firstNameTextField.text!, self.lastNameTextField.text!, phoneNumber: self.telephoneTextField.text!, email: self.emailTextField.text!, completion: { (response: SendVerificationCodeResponse) in
             if (response.result == "error") {
                 let message = response.error?.message
                 self.showAlert("Error", message: message!)
