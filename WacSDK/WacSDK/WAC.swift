@@ -3,14 +3,13 @@ import Alamofire
 import PromiseKit
 
 typealias JSON = [String: Any]
-
 // enum used for convenience purposes (optional)
 public enum ServerURL: String {
     case base = "https://secure.just.cash"
 }
 
-public protocol LoginProtocol {
-    func onLogin(_ sessionKey: String)
+public protocol SessionCallback {
+    func onSessionCreated(_ sessionKey: String)
     func onError(_ errorMessage: String?)
 }
 
@@ -39,7 +38,7 @@ open class WAC: NSObject {
     
     // API
     
-    public func createCode(_ atmId: String, _ amount: String, _ verificationCode: String, completion: @escaping (CashCodeResponse) -> ()) {
+    public func createCashCode(_ atmId: String, _ amount: String, _ verificationCode: String, completion: @escaping (CashCodeResponse) -> ()) {
         var params = ["atm_id": atmId, "amount": amount, "verification_code": verificationCode]
         params.merge(sessionKeyParam, uniquingKeysWith: { $1})
         Request().request(.createCode,
@@ -55,12 +54,12 @@ open class WAC: NSObject {
         }
     }
     
-    public func checkCodeStatus(_ code: String, completion: @escaping (CodeStatusResponse) -> ()) {
+    public func checkCashCodeStatus(_ code: String, completion: @escaping (CashCodeStatusResponse) -> ()) {
         Request().request(.checkCodeStatus(code),
                           parameters: sessionKeyParam,
                           headers: defaultHeader)
         .done { data -> Void in
-            self.decode(data) { (response: CodeStatusResponse) in
+            self.decode(data) { (response: CashCodeStatusResponse) in
                 completion(response)
             }
         }
@@ -69,7 +68,7 @@ open class WAC: NSObject {
         }
     }
     
-    public func login(_ listener: LoginProtocol) {
+    public func createSession(_ listener: SessionCallback) {
         Request().request(.login,
                           headers: defaultHeader)
         .done { data -> Void in
@@ -80,7 +79,7 @@ open class WAC: NSObject {
                 }
                 if let session = response.data.sessionKey {
                     self.sessionKey = session
-                    listener.onLogin(self.sessionKey)
+                    listener.onSessionCreated(self.sessionKey)
                 }
             }
         }
@@ -90,12 +89,12 @@ open class WAC: NSObject {
         }
     }
     
-    public func getAtmList(completion: @escaping (ATMListResponse) -> ()) {
+    public func getAtmList(completion: @escaping (AtmListResponse) -> ()) {
         Request().request(.getAtmList,
                           parameters: sessionKeyParam,
                           headers: defaultHeader)
         .done { data -> Void in
-            self.decode(data) { (response: ATMListResponse) in
+            self.decode(data) { (response: AtmListResponse) in
                 completion(response)
             }
         }
@@ -104,12 +103,12 @@ open class WAC: NSObject {
         }
     }
     
-    public func getAtmListByLocation(_ latitude: String, _ longitude: String, completion: @escaping (ATMListResponse) -> ()) {
+    public func getAtmListByLocation(_ latitude: String, _ longitude: String, completion: @escaping (AtmListResponse) -> ()) {
         Request().request(.getAtmListByLocation(latitude, longitude),
                           parameters: sessionKeyParam,
                           headers: defaultHeader)
         .done { data -> Void in
-            self.decode(data) { (response: ATMListResponse) in
+            self.decode(data) { (response: AtmListResponse) in
                 completion(response)
             }
         }
@@ -118,14 +117,14 @@ open class WAC: NSObject {
         }
     }
     
-    public func sendVerificationCode(_ firstName: String, _ lastName: String, phoneNumber: String = "", email: String = "", completion: @escaping (SendCodeResponse) -> ()) {
+    public func sendVerificationCode(_ firstName: String, _ lastName: String, phoneNumber: String = "", email: String = "", completion: @escaping (SendVerificationCodeResponse) -> ()) {
         var params = ["first_name": firstName, "last_name": lastName, "phone_number": phoneNumber, "email": email]
         params.merge(sessionKeyParam, uniquingKeysWith: { $1})
         Request().request(.sendVerificationCode,
                           parameters: params,
                           headers: defaultHeader)
         .done { data -> Void in
-            self.decode(data) { (response: SendCodeResponse) in
+            self.decode(data) { (response: SendVerificationCodeResponse) in
                 completion(response)
             }
         }

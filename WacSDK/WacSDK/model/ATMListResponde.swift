@@ -1,17 +1,17 @@
 
 import Foundation
 
-public struct ATMListResponse: Codable {
+public struct AtmListResponse: Codable {
     public let result: String
     public let error: WacError?
-    public let data: ATMItems?
+    public let data: AtmItems?
 }
 
-public struct ATMItems: Codable {
-    public let items: [ATMMachine]
+public struct AtmItems: Codable {
+    public let items: [AtmMachine]
 }
 
-public struct ATMMachine: Codable {
+public struct AtmMachine: Codable {
     public let atmId: String?
     public let addressDesc: String?
     public let detail: String?

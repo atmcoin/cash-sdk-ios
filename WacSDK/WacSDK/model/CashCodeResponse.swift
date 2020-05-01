@@ -7,7 +7,7 @@ public struct CashCodeResponse: Codable {
     public let data: CashCodeItems?
 }
 
-public struct SendCodeResponse: Codable {
+public struct SendVerificationCodeResponse: Codable {
     public let result: String
     public let error: WacError?
     public let data: SendCodeItems?
