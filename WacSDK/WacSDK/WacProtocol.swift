@@ -14,6 +14,4 @@ protocol WacProtocol {
      func getAtmList(completion: @escaping (AtmListResponse) -> ())
      func getAtmListByLocation(_ latitude: String, _ longitude: String, completion: @escaping (AtmListResponse) -> ())
      func sendVerificationCode(_ firstName: String, _ lastName: String, phoneNumber: String?, email: String?, completion: @escaping (SendVerificationCodeResponse) -> ()) throws
-    
-    
 }
