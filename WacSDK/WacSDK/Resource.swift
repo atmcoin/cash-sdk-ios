@@ -1,5 +1,8 @@
 
-import Alamofire
+public enum HTTPMethod: String {
+    case get = "GET"
+    case post = "POST"
+}
 
 public enum Resource {
     case checkCodeStatus(String)

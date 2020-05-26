@@ -4,7 +4,7 @@ import WacSDK
 
 class ViewController: UIViewController, SessionCallback {
     
-    var client: WAC?
+    private var client: WAC!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -65,7 +65,7 @@ class ViewController: UIViewController, SessionCallback {
     // Implement WAC
     
     @IBAction func createCashCode(_ sender: Any) {
-        client?.createCashCode(atmIdTextField.text!, amountTextField.text!, codeTextField.text!, completion: { (response: CashCodeResponse) in
+        client.createCashCode(atmIdTextField.text!, amountTextField.text!, codeTextField.text!, completion: { (response: CashCodeResponse) in
             if (response.result == "ok") {
                 self.pCodeTextField.text = response.data?.items?[0].secureCode!
                 self.checkPCodeButton.isEnabled = true
@@ -77,7 +77,7 @@ class ViewController: UIViewController, SessionCallback {
     }
     
     @IBAction func checkCodeStatus(_ sender: Any) {
-        client?.checkCashCodeStatus(pCodeTextField.text!, completion: { (response: CashCodeStatusResponse) in
+        client.checkCashCodeStatus(pCodeTextField.text!, completion: { (response: CashCodeStatusResponse) in
             if (response.result == "error") {
                 let message = response.error?.message
                 self.showAlert("Error", message: message!)
@@ -91,7 +91,7 @@ class ViewController: UIViewController, SessionCallback {
     @IBAction func createSession(_ sender: Any) {
         client = WAC.init()
         let listener = self
-        client?.createSession(listener)
+        client.createSession(listener)
         
         toggleViewsAfterLogin(true)
     }
@@ -108,7 +108,7 @@ class ViewController: UIViewController, SessionCallback {
     }
     
     @IBAction func sendVerificationCode(_ sender: Any) {
-        try?client?.sendVerificationCode(firstNameTextField.text!, self.lastNameTextField.text!, phoneNumber: self.telephoneTextField.text!, email: self.emailTextField.text!, completion: { (response: SendVerificationCodeResponse) in
+        client.sendVerificationCode(first: firstNameTextField.text!, surname: lastNameTextField.text!, phoneNumber: telephoneTextField.text!, email: emailTextField.text!, completion: { (response: SendVerificationCodeResponse) in
             if (response.result == "error") {
                 let message = response.error?.message
                 self.showAlert("Error", message: message!)
@@ -119,13 +119,13 @@ class ViewController: UIViewController, SessionCallback {
     // ATM picker
     
     func getAtmListByLocation(_ latitude: String, _ longitude: String) {
-        client?.getAtmListByLocation(latitude, longitude, completion: { (response: AtmListResponse) in
+        client.getAtmListByLocation(latitude, longitude, completion: { (response: AtmListResponse) in
             self.atmListTextView.text = String(describing: response)
         })
     }
     
     func getAtmList() {
-        client?.getAtmList(completion: { (response: AtmListResponse) in
+        client.getAtmList(completion: { (response: AtmListResponse) in
             self.atmListTextView.text = String(describing: response)
         })
     }
@@ -210,9 +210,6 @@ class ViewController: UIViewController, SessionCallback {
         }
 
         scrollView.scrollIndicatorInsets = scrollView.contentInset
-
-//        let selectedRange = scrollView.selectedRange
-//        scrollView.scrollRangeToVisible(selectedRange)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

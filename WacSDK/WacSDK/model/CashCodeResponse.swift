@@ -25,6 +25,15 @@ public struct CashCodeItems: Codable {
     public let items: [CashCode]?
 }
 
+/*
+ {
+     "secure_code": "ngupunxokbpkiegeqofj",
+     "address": "2N3bFMDuRtfCkCfX5w5fBevCy7cRScjpoGL",
+     "usd_amount": "20",
+     "btc_amount": "0.00259302",
+     "btc_whole_unit_price": "7713"
+ }
+ */
 public struct CashCode: Codable {
     public let secureCode: String?
     public let address: String?

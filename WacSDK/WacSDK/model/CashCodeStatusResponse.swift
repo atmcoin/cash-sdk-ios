@@ -10,7 +10,21 @@ public struct CashCodeStatusResponse: Codable {
 public struct CodeStatusItems: Codable {
     public let items: [CashStatus]
 }
-
+/*
+ {
+     "pcode": null,
+     "status": "A",
+     "address": "2N3bFMDuRtfCkCfX5w5fBevCy7cRScjpoGL",
+     "usd_amount": "20.00",
+     "btc_amount": "0.00259302",
+     "btc_whole_unit_price": "7713.0",
+     "expiration": "2020-05-26T02:36:48Z",
+     "atm_id": "5004",
+     "loc_description": "Target Lake Park",
+     "loc_lat": "26.8053350",
+     "loc_lon": "-80.0830290"
+ }
+ */
 public struct CashStatus: Codable {
     public let code: String?
     public let status: String?
@@ -49,7 +63,7 @@ public struct CashStatus: Codable {
 }
 
 enum CodeStatus: String, CaseIterable {
-    case NEW_CODE = "A"
+    case AWAITING = "A"
     case FUNDED_NOT_CONFIRMED = "W"
     case FUNDED = "V"
     case USED = "U"
