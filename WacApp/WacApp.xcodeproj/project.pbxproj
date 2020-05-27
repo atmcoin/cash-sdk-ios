@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B312A3B6247DCB1700075583 /* WacSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B312A3B5247DCB1700075583 /* WacSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		B36208362453CE7800D6A566 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36208352453CE7800D6A566 /* AppDelegate.swift */; };
 		B362083A2453CE7800D6A566 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36208392453CE7800D6A566 /* ViewController.swift */; };
 		B362083D2453CE7800D6A566 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B362083B2453CE7800D6A566 /* Main.storyboard */; };
 		B362083F2453CE7A00D6A566 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B362083E2453CE7A00D6A566 /* Assets.xcassets */; };
 		B36208422453CE7A00D6A566 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B36208402453CE7A00D6A566 /* LaunchScreen.storyboard */; };
+		B3E2C2B9247ED3A000596913 /* WacSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B312A3B5247DCB1700075583 /* WacSDK.framework */; };
+		B3E2C2BA247ED3A000596913 /* WacSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B312A3B5247DCB1700075583 /* WacSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -22,6 +23,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				B3E2C2BA247ED3A000596913 /* WacSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -44,7 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B312A3B6247DCB1700075583 /* WacSDK.framework in Frameworks */,
+				B3E2C2B9247ED3A000596913 /* WacSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
