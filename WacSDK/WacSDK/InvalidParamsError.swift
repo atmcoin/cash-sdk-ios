@@ -1,9 +1,3 @@
-//
-//  InvalidParamsError.swift
-//  WacSDK
-//
-//  Created by David Fernandez on 2020-05-01.
-//
 
 import Foundation
 

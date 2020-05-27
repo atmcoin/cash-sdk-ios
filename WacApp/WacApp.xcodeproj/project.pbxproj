@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9D51D2BB245C853F00319F29 /* WacSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D51D2BA245C853F00319F29 /* WacSDK.framework */; };
-		9D51D2BC245C853F00319F29 /* WacSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D51D2BA245C853F00319F29 /* WacSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B312A3B6247DCB1700075583 /* WacSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B312A3B5247DCB1700075583 /* WacSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		B36208362453CE7800D6A566 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36208352453CE7800D6A566 /* AppDelegate.swift */; };
-		B36208382453CE7800D6A566 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36208372453CE7800D6A566 /* SceneDelegate.swift */; };
 		B362083A2453CE7800D6A566 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36208392453CE7800D6A566 /* ViewController.swift */; };
 		B362083D2453CE7800D6A566 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B362083B2453CE7800D6A566 /* Main.storyboard */; };
 		B362083F2453CE7A00D6A566 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B362083E2453CE7A00D6A566 /* Assets.xcassets */; };
@@ -24,7 +22,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9D51D2BC245C853F00319F29 /* WacSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -32,15 +29,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9D51D2A7245C822C00319F29 /* WacSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WacSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D51D2AA245C834B00319F29 /* WacSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WacSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D51D2AE245C837E00319F29 /* WacSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WacSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D51D2B2245C841D00319F29 /* WacSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WacSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D51D2B6245C84A900319F29 /* WacSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WacSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D51D2BA245C853F00319F29 /* WacSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WacSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B312A3B5247DCB1700075583 /* WacSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WacSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B36208322453CE7800D6A566 /* WacApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WacApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B36208352453CE7800D6A566 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B36208372453CE7800D6A566 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B36208392453CE7800D6A566 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B362083C2453CE7800D6A566 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B362083E2453CE7A00D6A566 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,7 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D51D2BB245C853F00319F29 /* WacSDK.framework in Frameworks */,
+				B312A3B6247DCB1700075583 /* WacSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,7 +72,6 @@
 			isa = PBXGroup;
 			children = (
 				B36208352453CE7800D6A566 /* AppDelegate.swift */,
-				B36208372453CE7800D6A566 /* SceneDelegate.swift */,
 				B36208392453CE7800D6A566 /* ViewController.swift */,
 				B362083B2453CE7800D6A566 /* Main.storyboard */,
 				B362083E2453CE7A00D6A566 /* Assets.xcassets */,
@@ -94,12 +84,7 @@
 		B36208572453CEB200D6A566 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9D51D2BA245C853F00319F29 /* WacSDK.framework */,
-				9D51D2B6245C84A900319F29 /* WacSDK.framework */,
-				9D51D2B2245C841D00319F29 /* WacSDK.framework */,
-				9D51D2AE245C837E00319F29 /* WacSDK.framework */,
-				9D51D2AA245C834B00319F29 /* WacSDK.framework */,
-				9D51D2A7245C822C00319F29 /* WacSDK.framework */,
+				B312A3B5247DCB1700075583 /* WacSDK.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -114,7 +99,6 @@
 				B362082E2453CE7800D6A566 /* Sources */,
 				B362082F2453CE7800D6A566 /* Frameworks */,
 				B36208302453CE7800D6A566 /* Resources */,
-				B362085E2453CF6A00D6A566 /* Carthage (Copy Frameworks) */,
 				9D51D2BD245C853F00319F29 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -172,31 +156,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		B362085E2453CF6A00D6A566 /* Carthage (Copy Frameworks) */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/../Vendor/Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/../Vendor/Carthage/Build/iOS/PromiseKit.framework",
-			);
-			name = "Carthage (Copy Frameworks)";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(BUILD_PRODUCT_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
-				"$(BUILD_PRODUCT_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PromiseKit.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		B362082E2453CE7800D6A566 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -204,7 +163,6 @@
 			files = (
 				B362083A2453CE7800D6A566 /* ViewController.swift in Sources */,
 				B36208362453CE7800D6A566 /* AppDelegate.swift in Sources */,
-				B36208382453CE7800D6A566 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,7 +308,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = 97243GD77A;
+				DEVELOPMENT_TEAM = J8785B8QGT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -374,7 +332,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = 97243GD77A;
+				DEVELOPMENT_TEAM = J8785B8QGT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
