@@ -1,9 +1,9 @@
 
 import Foundation
 
-public struct LoginResponse: Codable {
+public struct LoginResponse: Response, Codable {
     public let result: String
-    public let error: String?
+    public let error: WacError?
     public let data: LoginData
 }
 

@@ -91,7 +91,7 @@ class ViewController: UIViewController, SessionCallback {
     @IBAction func createSession(_ sender: Any) {
         client = WAC.init()
         let listener = self
-        client.createSession(listener)
+        client.createSession(listener) {}
         
         toggleViewsAfterLogin(true)
     }
@@ -137,8 +137,8 @@ class ViewController: UIViewController, SessionCallback {
         self.sessionKeyLabel.text = sessionKey
     }
     
-    func onError(_ errorMessage: String?) {
-        showAlert("Error", message: errorMessage!)
+    func onError(_ error: WacError?) {
+        showAlert("Error", message: (error?.message)!)
     }
     
     // Enforce certain fields to have content

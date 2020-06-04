@@ -1,13 +1,13 @@
 
 import Foundation
 
-public struct CashCodeResponse: Codable {
+public struct CashCodeResponse: Response, Codable {
     public let result: String
     public let error: WacError?
     public let data: CashCodeItems?
 }
 
-public struct SendVerificationCodeResponse: Codable {
+public struct SendVerificationCodeResponse: Response, Codable {
     public let result: String
     public let error: WacError?
     public let data: SendCodeItems?

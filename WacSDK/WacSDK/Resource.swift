@@ -9,6 +9,7 @@ public enum Resource {
     case createCode
     case getAtmList
     case getAtmListByLocation(String, String)
+    case isSessionValid
     case login
     case sendVerificationCode
     
@@ -22,6 +23,8 @@ public enum Resource {
             return (.get, "/atm/wac/atm/list")
         case .getAtmListByLocation(let lat, let long):
             return (.get, "/atm/wac/atm/near/latlon/\(lat)/\(long)")
+        case .isSessionValid:
+            return (.get, "/atm/auth/user")
         case .login:
             return (.post, "/atm/wac/guest/login")
         case .sendVerificationCode:

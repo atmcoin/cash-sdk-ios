@@ -27,11 +27,12 @@
 		B36207D02452933F00D6A566 /* WAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36207CF2452933F00D6A566 /* WAC.swift */; };
 		B36207E02452A27400D6A566 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36207DF2452A27400D6A566 /* Resource.swift */; };
 		B36207E22452A2BE00D6A566 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36207E12452A2BE00D6A566 /* Request.swift */; };
-		B36207F92452B18800D6A566 /* ATMListResponde.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36207F82452B18800D6A566 /* ATMListResponde.swift */; };
+		B36207F92452B18800D6A566 /* ATMListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36207F82452B18800D6A566 /* ATMListResponse.swift */; };
 		B36207FD2452B70D00D6A566 /* CashCodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36207FC2452B70D00D6A566 /* CashCodeResponse.swift */; };
 		B36207FF2452B9AF00D6A566 /* CashCodeStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36207FE2452B9AF00D6A566 /* CashCodeStatusResponse.swift */; };
 		B36208012452C39600D6A566 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36208002452C39600D6A566 /* LoginResponse.swift */; };
 		B36208032452C40D00D6A566 /* WacError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36208022452C40D00D6A566 /* WacError.swift */; };
+		B38C2B752488357A00268FCD /* ResponseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C2B742488357900268FCD /* ResponseProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,11 +44,12 @@
 		B36207CF2452933F00D6A566 /* WAC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAC.swift; sourceTree = "<group>"; };
 		B36207DF2452A27400D6A566 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		B36207E12452A2BE00D6A566 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		B36207F82452B18800D6A566 /* ATMListResponde.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMListResponde.swift; sourceTree = "<group>"; };
+		B36207F82452B18800D6A566 /* ATMListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATMListResponse.swift; sourceTree = "<group>"; };
 		B36207FC2452B70D00D6A566 /* CashCodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashCodeResponse.swift; sourceTree = "<group>"; };
 		B36207FE2452B9AF00D6A566 /* CashCodeStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashCodeStatusResponse.swift; sourceTree = "<group>"; };
 		B36208002452C39600D6A566 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		B36208022452C40D00D6A566 /* WacError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WacError.swift; sourceTree = "<group>"; };
+		B38C2B742488357900268FCD /* ResponseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,11 +98,12 @@
 		B36208042452C4C800D6A566 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				B36207F82452B18800D6A566 /* ATMListResponde.swift */,
+				B36207F82452B18800D6A566 /* ATMListResponse.swift */,
 				B36207FC2452B70D00D6A566 /* CashCodeResponse.swift */,
 				B36207FE2452B9AF00D6A566 /* CashCodeStatusResponse.swift */,
 				B36208002452C39600D6A566 /* LoginResponse.swift */,
 				B36208022452C40D00D6A566 /* WacError.swift */,
+				B38C2B742488357900268FCD /* ResponseProtocol.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -219,10 +222,11 @@
 				B36207D02452933F00D6A566 /* WAC.swift in Sources */,
 				B36207FF2452B9AF00D6A566 /* CashCodeStatusResponse.swift in Sources */,
 				B36207E22452A2BE00D6A566 /* Request.swift in Sources */,
-				B36207F92452B18800D6A566 /* ATMListResponde.swift in Sources */,
+				B36207F92452B18800D6A566 /* ATMListResponse.swift in Sources */,
 				B36207FD2452B70D00D6A566 /* CashCodeResponse.swift in Sources */,
 				B36207E02452A27400D6A566 /* Resource.swift in Sources */,
 				9D51D2A6245C81B100319F29 /* InvalidParamsError.swift in Sources */,
+				B38C2B752488357A00268FCD /* ResponseProtocol.swift in Sources */,
 				B36208032452C40D00D6A566 /* WacError.swift in Sources */,
 				9D51D2A4245C781000319F29 /* WacProtocol.swift in Sources */,
 				B36208012452C39600D6A566 /* LoginResponse.swift in Sources */,
