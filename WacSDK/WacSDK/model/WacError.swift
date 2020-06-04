@@ -1,6 +1,10 @@
 
 import Foundation
 
+public enum WACErrorCode: Int {
+    case sessionTimeout = 105
+}
+
 public struct WacError: Codable {
     public let code: String
     public let message: String?

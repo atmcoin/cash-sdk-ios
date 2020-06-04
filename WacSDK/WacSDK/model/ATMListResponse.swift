@@ -1,7 +1,7 @@
 
 import Foundation
 
-public struct AtmListResponse: Codable {
+public struct AtmListResponse: Response, Codable {
     public let result: String
     public let error: WacError?
     public let data: AtmItems?
