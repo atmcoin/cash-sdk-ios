@@ -27,7 +27,8 @@ public struct AtmItems: Codable {
      "atm_min": "20.00",
      "atm_max": "600.00",
      "atm_bills": "20.00",
-     "atm_currency": "USD"
+     "atm_currency": "USD",
+     "atm_red": "1"
  }
  */
 public struct AtmMachine: Codable {
@@ -46,6 +47,7 @@ public struct AtmMachine: Codable {
     public let max: String?
     public let bills: String?
     public let currency: String?
+    public let redemption: String?
 
     enum CodingKeys: String, CodingKey {
         case atmId = "atm_id"
@@ -63,5 +65,6 @@ public struct AtmMachine: Codable {
         case max = "atm_max"
         case bills = "atm_bills"
         case currency = "atm_currency"
+        case redemption = "atm_red"
     }
 }
