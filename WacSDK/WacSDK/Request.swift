@@ -44,8 +44,6 @@ class Request {
         let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
             
             DispatchQueue.main.async {
-                let str = String(decoding: data!, as: UTF8.self)
-                print(str)
                 completion(data, error)
             }
             
