@@ -12,7 +12,7 @@ public struct CodeStatusItems: Codable {
 }
 /*
  {
-     "pcode": null,
+     "pcode": null, // 12345-6789
      "status": "A",
      "address": "2N3bFMDuRtfCkCfX5w5fBevCy7cRScjpoGL",
      "usd_amount": "20.00",

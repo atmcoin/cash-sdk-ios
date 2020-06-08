@@ -36,9 +36,9 @@ public struct AtmMachine: Codable {
     public let addressDesc: String?
     public let detail: String?
     public let street: String?
-    public let city: String?
-    public let state: String?
-    public let zip: String?
+    public let city: String? = ""
+    public let state: String? = ""
+    public let zip: String? = ""
     public let longitude: String?
     public let latitude: String?
     public let desc: String?

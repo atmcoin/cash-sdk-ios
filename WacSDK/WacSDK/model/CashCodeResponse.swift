@@ -35,7 +35,7 @@ public struct CashCodeItems: Codable {
  }
  */
 public struct CashCode: Codable {
-    public let secureCode: String?
+    public var secureCode: String?
     public let address: String?
     public let usdAmount: String?
     public let btcAmount: String?
