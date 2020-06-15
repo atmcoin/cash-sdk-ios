@@ -1,4 +1,7 @@
-# WAC
+# Wallet ATM Cash (WAC)
+
+Allows any digital wallet to access cash at retail ATMs using the latest cardless technology.
+
 This :iphone: ios library uses carthage.
 
 Install carthage with your favourite package manager:
