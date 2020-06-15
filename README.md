@@ -40,9 +40,9 @@ Gif showing the steps:
     <img src="Carthage_Copy_Frameworks.png" alt="Carthage_Copy_Frameworks" width="600px"/>
   <p/>
  
-- :crystal_ball: WacApp - Demo app that shows hot to use the APIs.
 - :lock_with_ink_pen: WacSDK - Builds the Framework based on architecture. App Store would only need device (RELEASE) configuration.
 
+- :crystal_ball: WacApp - Demo app that shows hot to use the APIs.
 
 <p align="center">
   <img src="https://github.com/gianpac/WAC/blob/master/demoapp.png" alt="demoApp" width="300px"/>
