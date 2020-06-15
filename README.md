@@ -15,7 +15,7 @@ Available Schemes:
 <img src="https://github.com/gianpac/WAC/blob/master/schemes.png" alt="schemes" width="170px"/>
 
 - :hammer: UniversalWACSDK 
-  - It compiles and creates a fat SDK library using DEBUG and RELEASE variants for all architectures (real device arm, simulator x86, ..). :warning: Do not use this for App Store releases.
+  - It compiles and creates a fat SDK library using DEBUG and RELEASE variants for all architectures (real device arm, simulator x86, ..). :warning: x86 is used for Simulators in xCode, App Store does not accept binaries that include x86 code. Please use the WacSDK scheme to include only arm architecture.
   - Creates the `WacSDK.framework` under products folder
   - Copy the `WacSDK.framework` to your swift app under `Frameworks` as Embedded
  
