@@ -6,6 +6,11 @@ public protocol SessionCallback {
     func onError(_ errorMessage: WacError?)
 }
 
+public enum WacUrl: String {
+    case Staging = "https://secure.just.cash"
+    case Production = "https://api-prd.just.cash"
+}
+
 open class WAC: WacProtocol  {
     public var sessionKey: String = ""
     private var requestManager: Request
@@ -20,8 +25,8 @@ open class WAC: WacProtocol  {
         }
     }
     
-    public init(url: String = "https://secure.just.cash") {
-        requestManager = Request.init(url: url)
+    public init(url: WacUrl = .Production) {
+        requestManager = Request.init(url: url.rawValue)
     }
     
     func decode<T:Decodable>(_ data: Data, completion: @escaping (T) -> ()) {
