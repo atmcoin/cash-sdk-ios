@@ -32,9 +32,13 @@ open class WAC: WacProtocol  {
     func decode<T:Decodable>(_ data: Data, completion: @escaping (T) -> ()) {
         let object: Response = try! JSONDecoder().decode(T.self, from: data) as! Response
         if let error = object.error {
-            handleSessionExpiry(error) {
-                completion(object as! T)
+            if (Int(error.code) == WACErrorCode.sessionTimeout.rawValue) {
+                handleSessionExpiry(error) {
+                    completion(object as! T)
+                }
+                return;
             }
+            completion(object as! T)
         }
         else {
             completion(object as! T)
@@ -55,9 +59,13 @@ open class WAC: WacProtocol  {
                                 if (error == nil) {
                                     self?.decode(data!) { (response: CashCodeResponse) in
                                         if response.error != nil {
-                                            self?.createCashCode(atmId, amount, verificationCode, completion: { (response: CashCodeResponse) in
-                                                completion(response)
-                                            })
+                                            if (Int(response.error!.code) == WACErrorCode.sessionTimeout.rawValue) {
+                                                self?.createCashCode(atmId, amount, verificationCode, completion: { (response: CashCodeResponse) in
+                                                    completion(response)
+                                                })
+                                                return;
+                                            }
+                                            completion(response)
                                         }
                                         else {
                                             completion(response)
@@ -74,9 +82,13 @@ open class WAC: WacProtocol  {
                                 if (error == nil) {
                                     self?.decode(data!) { (response: CashCodeStatusResponse) in
                                         if response.error != nil {
-                                            self?.checkCashCodeStatus(code, completion: { (response: CashCodeStatusResponse) in
-                                                completion(response)
-                                            })
+                                            if (Int(response.error!.code) == WACErrorCode.sessionTimeout.rawValue) {
+                                                self?.checkCashCodeStatus(code, completion: { (response: CashCodeStatusResponse) in
+                                                    completion(response)
+                                                })
+                                                return
+                                            }
+                                            completion(response)
                                         }
                                         else {
                                             completion(response)
@@ -114,9 +126,13 @@ open class WAC: WacProtocol  {
                                 if (error == nil) {
                                     self?.decode(data!) { (response: AtmListResponse) in
                                         if response.error != nil {
-                                            self?.getAtmList(completion: { (response: AtmListResponse) in
-                                                completion(response)
-                                            })
+                                            if (Int(response.error!.code) == WACErrorCode.sessionTimeout.rawValue) {
+                                                self?.getAtmList(completion: { (response: AtmListResponse) in
+                                                    completion(response)
+                                                })
+                                                return
+                                            }
+                                            completion(response)
                                         }
                                         else {
                                             completion(response)
@@ -133,9 +149,13 @@ open class WAC: WacProtocol  {
                                 if (error == nil) {
                                     self?.decode(data!) { (response: AtmListResponse) in
                                         if response.error != nil {
-                                            self?.getAtmListByLocation(latitude, longitude, completion: { (response: AtmListResponse) in
-                                                completion(response)
-                                            })
+                                            if (Int(response.error!.code) == WACErrorCode.sessionTimeout.rawValue) {
+                                                self?.getAtmListByLocation(latitude, longitude, completion: { (response: AtmListResponse) in
+                                                    completion(response)
+                                                })
+                                                return
+                                            }
+                                            completion(response)
                                         }
                                         else {
                                             completion(response)
@@ -170,9 +190,13 @@ open class WAC: WacProtocol  {
                                 if (error == nil) {
                                     self?.decode(data!) { (response: SendVerificationCodeResponse) in
                                         if response.error != nil {
-                                            self?.sendVerificationCode(first: name, surname: last, phoneNumber: phoneNumber, email: email, completion: { (response: SendVerificationCodeResponse) in
-                                                completion(response)
-                                            })
+                                            if (Int(response.error!.code) == WACErrorCode.sessionTimeout.rawValue) {
+                                                self?.sendVerificationCode(first: name, surname: last, phoneNumber: phoneNumber, email: email, completion: { (response: SendVerificationCodeResponse) in
+                                                    completion(response)
+                                                })
+                                                return
+                                            }
+                                            completion(response)
                                         }
                                         else {
                                             completion(response)
@@ -183,10 +207,8 @@ open class WAC: WacProtocol  {
     }
     
     private func handleSessionExpiry(_ error: WacError, completion: @escaping (()-> Void)) {
-        if (Int(error.code) == WACErrorCode.sessionTimeout.rawValue) {
-            createSession(self.listener!) {
-                completion()
-            }
+        createSession(self.listener!) {
+            completion()
         }
     }
     
