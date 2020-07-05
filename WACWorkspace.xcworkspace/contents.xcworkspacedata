@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:WacSDK/WacSDK.xcodeproj">
+      location = "group:/Users/giancarlo/Documents/Projects/Personal/atm-wallet-ios/Modules/cash-sdk-ios/CashSDK/CashSDK.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:WacSDK/../WacApp/WacApp.xcodeproj">
+      location = "group:/Users/giancarlo/Documents/Projects/Personal/atm-wallet-ios/Modules/cash-sdk-ios/WacApp/CashSDKSampleApp.xcodeproj">
    </FileRef>
 </Workspace>
