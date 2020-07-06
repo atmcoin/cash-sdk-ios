@@ -21,7 +21,8 @@ open class CashSDK: CashSDKProtocol  {
         get {
             return [
                 "Content-Type": "application/json",
-                "sessionKey": sessionKey
+                "sessionKey": sessionKey,
+                "merapi-output": "json"
             ]
         }
     }

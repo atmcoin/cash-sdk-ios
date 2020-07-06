@@ -1,6 +1,14 @@
 
 import Foundation
 
+/*
+ {
+    "result": "ok",
+    "error": null,
+    "data": {}
+ }
+ */
+
 public struct AtmListResponse: Response, Codable {
     public let result: String
     public let error: CashSDKError?
@@ -32,22 +40,22 @@ public struct AtmItems: Codable {
  }
  */
 public struct AtmMachine: Codable {
-    public let atmId: String?
+    public let atmId: Int
     public let addressDesc: String?
     public let detail: String?
     public let street: String?
     public let city: String? = ""
     public let state: String? = ""
     public let zip: String? = ""
-    public let longitude: String?
-    public let latitude: String?
+    public let longitude: Double
+    public let latitude: Double
     public let desc: String?
     public let fees: String?
-    public let min: String?
-    public let max: String?
-    public let bills: String?
+    public let min: Float
+    public let max: Float
+    public let bills: Float
     public let currency: String?
-    public let redemption: String?
+    public let redemption: Int
 
     enum CodingKeys: String, CodingKey {
         case atmId = "atm_id"
