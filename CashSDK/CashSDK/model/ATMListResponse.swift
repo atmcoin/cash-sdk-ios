@@ -75,4 +75,8 @@ public struct AtmMachine: Codable {
         case currency = "atm_currency"
         case redemption = "atm_red"
     }
+    
+    public func isRedeemable() -> Bool {
+        return redemption != 0
+    }
 }

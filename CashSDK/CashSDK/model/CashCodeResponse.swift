@@ -37,9 +37,9 @@ public struct CashCodeItems: Codable {
 public struct CashCode: Codable {
     public var secureCode: String?
     public let address: String?
-    public let usdAmount: String?
-    public let btcAmount: String?
-    public let unitPrice: String?
+    public let usdAmount: Float
+    public let btcAmount: Double
+    public let unitPrice: Float
     
     enum CodingKeys: String, CodingKey {
         case secureCode = "secure_code"
