@@ -12,7 +12,7 @@ public enum CashCoreErrorCode: Int {
 }
 
 public struct CashCoreError: Codable, Error {
-    public let code: Int
+    public let code: String
     public let message: String?
     
     enum CodingKeys: String, CodingKey {
