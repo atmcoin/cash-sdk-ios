@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,8 +12,7 @@
 		B362083D2453CE7800D6A566 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B362083B2453CE7800D6A566 /* Main.storyboard */; };
 		B362083F2453CE7A00D6A566 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B362083E2453CE7A00D6A566 /* Assets.xcassets */; };
 		B36208422453CE7A00D6A566 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B36208402453CE7A00D6A566 /* LaunchScreen.storyboard */; };
-		B3E2C2B9247ED3A000596913 /* WacSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B312A3B5247DCB1700075583 /* WacSDK.framework */; };
-		B3E2C2BA247ED3A000596913 /* WacSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B312A3B5247DCB1700075583 /* WacSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B38AB46024C67B7700C71B8A /* CashCore in Frameworks */ = {isa = PBXBuildFile; productRef = B38AB45F24C67B7700C71B8A /* CashCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,7 +22,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B3E2C2BA247ED3A000596913 /* WacSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -31,7 +29,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B312A3B5247DCB1700075583 /* WacSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WacSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B36208322453CE7800D6A566 /* WacApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WacApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B36208352453CE7800D6A566 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B36208392453CE7800D6A566 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +36,7 @@
 		B362083E2453CE7A00D6A566 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B36208412453CE7A00D6A566 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B36208432453CE7A00D6A566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B38AB45D24C67B1E00C71B8A /* CashCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CashCore; path = ../CashCore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3E2C2B9247ED3A000596913 /* WacSDK.framework in Frameworks */,
+				B38AB46024C67B7700C71B8A /* CashCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,9 +54,10 @@
 		B36208292453CE7800D6A566 = {
 			isa = PBXGroup;
 			children = (
+				B38AB45D24C67B1E00C71B8A /* CashCore */,
 				B36208342453CE7800D6A566 /* WacApp */,
 				B36208332453CE7800D6A566 /* Products */,
-				B36208572453CEB200D6A566 /* Frameworks */,
+				B38AB45E24C67B7700C71B8A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,12 +82,11 @@
 			path = WacApp;
 			sourceTree = "<group>";
 		};
-		B36208572453CEB200D6A566 /* Frameworks */ = {
+		B38AB45E24C67B7700C71B8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B312A3B5247DCB1700075583 /* WacSDK.framework */,
 			);
-			path = Frameworks;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -108,6 +106,9 @@
 			dependencies = (
 			);
 			name = WacApp;
+			packageProductDependencies = (
+				B38AB45F24C67B7700C71B8A /* CashCore */,
+			);
 			productName = WacApp;
 			productReference = B36208322453CE7800D6A566 /* WacApp.app */;
 			productType = "com.apple.product-type.application";
@@ -321,7 +322,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cash.just..WacApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cash.just.WacApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -345,7 +346,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cash.just..WacApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cash.just.WacApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -374,6 +375,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B38AB45F24C67B7700C71B8A /* CashCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CashCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B362082A2453CE7800D6A566 /* Project object */;
 }

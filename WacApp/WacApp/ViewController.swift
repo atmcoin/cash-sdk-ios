@@ -1,10 +1,10 @@
 
 import UIKit
-import WacSDK
+import CashCore
 
 class ViewController: UIViewController, SessionCallback {
     
-    private var client: WAC!
+    private var client: ServerEndpoints!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -65,33 +65,36 @@ class ViewController: UIViewController, SessionCallback {
     // Implement WAC
     
     @IBAction func createCashCode(_ sender: Any) {
-        client.createCashCode(atmIdTextField.text!, amountTextField.text!, codeTextField.text!, completion: { (response: CashCodeResponse) in
-            if (response.result == "ok") {
+        client.createCashCode(atmIdTextField.text!, amountTextField.text!, codeTextField.text!) { (result) in
+            switch result {
+            case .success(let response):
                 self.pCodeTextField.text = response.data?.items?[0].secureCode!
                 self.checkPCodeButton.isEnabled = true
+                break
+            case .failure(let error):
+                self.showAlert("Error", message: (error.message)!)
+                break
             }
-            else {
-                self.showAlert("Error", message: (response.error?.message)!)
-            }
-        })
+        }
     }
     
     @IBAction func checkCodeStatus(_ sender: Any) {
-        client.checkCashCodeStatus(pCodeTextField.text!, completion: { (response: CashCodeStatusResponse) in
-            if (response.result == "error") {
-                let message = response.error?.message
-                self.showAlert("Error", message: message!)
-            }
-            else {
+        client.checkCashCodeStatus(pCodeTextField.text!) { (result) in
+            switch result {
+            case .success(let response):
                 self.showAlert("Result", message: response.result)
+                break
+            case .failure(let error):
+                self.showAlert("Error", message: (error.message)!)
+                break
             }
-        })
+        }
     }
     
     @IBAction func createSession(_ sender: Any) {
-        client = WAC.init()
+        client = ServerEndpoints.init()
         let listener = self
-        client.createSession(listener) {}
+        client.createSession(listener)
         
         toggleViewsAfterLogin(true)
     }
@@ -108,26 +111,43 @@ class ViewController: UIViewController, SessionCallback {
     }
     
     @IBAction func sendVerificationCode(_ sender: Any) {
-        client.sendVerificationCode(first: firstNameTextField.text!, surname: lastNameTextField.text!, phoneNumber: telephoneTextField.text!, email: emailTextField.text!, completion: { (response: SendVerificationCodeResponse) in
-            if (response.result == "error") {
-                let message = response.error?.message
-                self.showAlert("Error", message: message!)
+        client.sendVerificationCode(first: firstNameTextField.text!, surname: lastNameTextField.text!, phoneNumber: telephoneTextField.text!, email: emailTextField.text!) { (result) in
+            switch result {
+            case .success(_):
+                break
+            case .failure(let error):
+                self.showAlert("Error", message: (error.message)!)
+                break
             }
-        })
+        }
     }
     
     // ATM picker
     
     func getAtmListByLocation(_ latitude: String, _ longitude: String) {
-        client.getAtmListByLocation(latitude, longitude, completion: { (response: AtmListResponse) in
-            self.atmListTextView.text = String(describing: response)
-        })
+        client.getAtmListByLocation(latitude, longitude) { (result) in
+            switch result {
+            case .success(let response):
+                self.atmListTextView.text = String(describing: response)
+                break
+            case .failure(let error):
+                self.showAlert("Error", message: (error.message)!)
+                break
+            }
+        }
     }
     
     func getAtmList() {
-        client.getAtmList(completion: { (response: AtmListResponse) in
-            self.atmListTextView.text = String(describing: response)
-        })
+        client.getAtmList { (result) in
+            switch result {
+            case .success(let response):
+                self.atmListTextView.text = String(describing: response)
+                break
+            case .failure(let error):
+                self.showAlert("Error", message: (error.message)!)
+                break
+            }
+        }
     }
     
     // Login Protocol Implementation
@@ -137,7 +157,7 @@ class ViewController: UIViewController, SessionCallback {
         self.sessionKeyLabel.text = sessionKey
     }
     
-    func onError(_ error: WacError?) {
+    func onError(_ error: CashCoreError?) {
         showAlert("Error", message: (error?.message)!)
     }
     
