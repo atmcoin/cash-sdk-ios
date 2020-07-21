@@ -67,13 +67,13 @@ public class ServerEndpoints: EndPoints  {
                                 case .success(let data):
                                     self?.decode(data) { (response: CashCodeResponse) in
                                         if let error = response.error {
-                                            result(.failure(error))
-                                        }
-                                        else {
-                                            if (Int(response.error!.code) == CashCoreErrorCode.sessionTimeout.rawValue) {
+                                            if (Int(error.code) == CashCoreErrorCode.sessionTimeout.rawValue) {
                                                 self?.createCashCode(atmId, amount, verificationCode, result: result)
                                                 return;
                                             }
+                                            result(.failure(error))
+                                        }
+                                        else {
                                             result(.success(response))
                                         }
                                     }
@@ -92,15 +92,15 @@ public class ServerEndpoints: EndPoints  {
                                 case .success(let data):
                                     self?.decode(data) { (response: CashCodeStatusResponse) in
                                         if let error = response.error {
-                                            result(.failure(error))
-                                        }
-                                        else {
-                                            if (Int(response.error!.code) == CashCoreErrorCode.sessionTimeout.rawValue) {
+                                            if (Int(error.code) == CashCoreErrorCode.sessionTimeout.rawValue) {
                                                 self?.checkCashCodeStatus(code, result: { (res) in
                                                     result(res)
                                                 })
                                                 return
                                             }
+                                            result(.failure(error))
+                                        }
+                                        else {
                                             result(.success(response))
                                         }
                                     }
@@ -143,15 +143,15 @@ public class ServerEndpoints: EndPoints  {
                                 case .success(let data):
                                     self?.decode(data) { (response: AtmListResponse) in
                                         if let error = response.error {
-                                            result(.failure(error))
-                                        }
-                                        else {
-                                            if (Int(response.error!.code) == CashCoreErrorCode.sessionTimeout.rawValue) {
+                                            if (Int(error.code) == CashCoreErrorCode.sessionTimeout.rawValue) {
                                                 self?.getAtmList(result: { (res) in
                                                     result(res)
                                                 })
                                                 return
                                             }
+                                            result(.failure(error))
+                                        }
+                                        else {
                                             result(.success(response))
                                         }
                                     }
@@ -170,15 +170,15 @@ public class ServerEndpoints: EndPoints  {
                                 case .success(let data):
                                     self?.decode(data) { (response: AtmListResponse) in
                                         if let error = response.error {
-                                            result(.failure(error))
-                                        }
-                                        else {
-                                            if (Int(response.error!.code) == CashCoreErrorCode.sessionTimeout.rawValue) {
+                                            if (Int(error.code) == CashCoreErrorCode.sessionTimeout.rawValue) {
                                                 self?.getAtmListByLocation(latitude, longitude, result: { (res) in
                                                     result(res)
                                                 })
                                                 return
                                             }
+                                            result(.failure(error))
+                                        }
+                                        else {
                                             result(.success(response))
                                         }
                                     }
@@ -216,15 +216,15 @@ public class ServerEndpoints: EndPoints  {
                                 case .success(let data):
                                     self?.decode(data) { (response: SendVerificationCodeResponse) in
                                         if let error = response.error {
-                                            result(.failure(error))
-                                        }
-                                        else {
-                                            if (Int(response.error!.code) == CashCoreErrorCode.sessionTimeout.rawValue) {
+                                            if (Int(error.code) == CashCoreErrorCode.sessionTimeout.rawValue) {
                                                 self?.sendVerificationCode(first: name, surname: last, phoneNumber: phoneNumber, email: email, result: { (res) in
                                                     result(res)
                                                 })
                                                 return
                                             }
+                                            result(.failure(error))
+                                        }
+                                        else {
                                             result(.success(response))
                                         }
                                     }
