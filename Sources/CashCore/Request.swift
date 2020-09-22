@@ -24,7 +24,8 @@ class Request {
         // URL will be built from components.
         // First, add the URL
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-            completion(.failure(CashCoreError.init(code: "\(CashCoreErrorCode.invalidEndPoint.rawValue)", message: "URLComponents Failure: Invalid URL End Point")))
+            completion(.failure(CashCoreError.init(code: "\(CashCoreErrorCode.invalidEndPoint.rawValue)",
+                message: "URLComponents Failure: Invalid URL End Point")))
             return
         }
         urlComponents.path = resource.resource.route
@@ -36,7 +37,8 @@ class Request {
         
         // Add HTTP headers
         guard let url = urlComponents.url else {
-            completion(.failure(CashCoreError.init(code: "\(CashCoreErrorCode.invalidEndPoint.rawValue)", message: "URLComponents Failure: A URL could not be created. Possible query string error")))
+            completion(.failure(CashCoreError.init(code: "\(CashCoreErrorCode.invalidEndPoint.rawValue)",
+                message: "URLComponents Failure: A URL could not be created. Possible query string error")))
             return
         }
         var request = URLRequest(url: url)
@@ -61,7 +63,8 @@ class Request {
                     return
                 }
                 guard let _ = response, let data = data else {
-                    let error = CashCoreError(code: "\(CashCoreErrorCode.corruptedResponse.rawValue)", message: "Response Corrupted: There was an error with the response or data in the response of \(String(describing: request.url))")
+                    let error = CashCoreError(code: "\(CashCoreErrorCode.corruptedResponse.rawValue)",
+                        message: "Response Corrupted: There was an error with the response or data in the response of \(String(describing: request.url))")
                     completion(.failure(error))
                     return
                 }
