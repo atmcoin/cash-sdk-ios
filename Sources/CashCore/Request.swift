@@ -59,7 +59,8 @@ class Request {
         let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
                 if let error = error {
-                    completion(.failure(error as! CashCoreError))
+                    let err = CashCoreError(code: String((error as NSError).code), message: error.localizedDescription)
+                    completion(.failure(err))
                     return
                 }
                 guard let _ = response, let data = data else {

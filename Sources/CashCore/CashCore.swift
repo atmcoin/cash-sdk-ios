@@ -3,7 +3,7 @@ import Foundation
 
 public protocol SessionCallback {
     func onSessionCreated(_ sessionKey: String)
-    func onError(_ errorMessage: CashCoreError?)
+    func onError(_ error: CashCoreError?)
 }
 
 /// Environments available. Defaults to Production
