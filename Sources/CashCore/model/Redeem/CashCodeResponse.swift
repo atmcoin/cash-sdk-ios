@@ -1,24 +1,11 @@
 
+
 import Foundation
 
 public struct CashCodeResponse: Response, Codable {
     public let result: String
     public let error: CashCoreError?
     public let data: CashCodeItems?
-}
-
-public struct SendVerificationCodeResponse: Response, Codable {
-    public let result: String
-    public let error: CashCoreError?
-    public let data: SendCodeItems?
-}
-
-public struct SendCodeItems: Codable {
-    public let items: [CashSendCode]?
-}
-
-public struct CashSendCode: Codable {
-    public let result: String
 }
 
 public struct CashCodeItems: Codable {

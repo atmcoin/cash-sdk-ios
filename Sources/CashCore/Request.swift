@@ -28,7 +28,7 @@ class Request {
                 message: "URLComponents Failure: Invalid URL End Point")))
             return
         }
-        urlComponents.path = resource.resource.route
+        urlComponents.path = resource.path
     
         // If query items, build the query string.
         if (query.count > 0) {
@@ -42,16 +42,16 @@ class Request {
             return
         }
         var request = URLRequest(url: url)
-        request.httpMethod = resource.resource.method.rawValue
         for (key, value) in headers {
             request.setValue(value, forHTTPHeaderField: key)
         }
         
         // Specify the HTTP method
-        let httpMethod = resource.resource.method
+        let httpMethod = resource.method
+        request.httpMethod = httpMethod.rawValue
     
         // If POST, add a body
-        if (httpMethod == .post) {
+        if (httpMethod == HTTPMethod.POST) {
             let postData = try? JSONSerialization.data(withJSONObject: body)
             request.httpBody = postData
         }

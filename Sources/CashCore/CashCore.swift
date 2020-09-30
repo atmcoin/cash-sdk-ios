@@ -204,7 +204,7 @@ public class ServerEndpoints: EndPoints  {
         }
     }
     
-    public func sendVerificationCode(first name: String, surname last: String, phoneNumber: String, email: String, result: @escaping (Result<SendVerificationCodeResponse, CashCoreError>) -> Void) {
+    public func sendVerificationCode(first name: String, surname last: String, phoneNumber: String, email: String, result: @escaping (Result<VerificationCodeResponse, CashCoreError>) -> Void) {
         let params: [String : String] = ["first_name": name,
                                          "last_name": last,
                                          "phone_number": phoneNumber,
@@ -214,7 +214,7 @@ public class ServerEndpoints: EndPoints  {
                                headers: headers) { [weak self] res in
                                 switch res {
                                 case .success(let data):
-                                    self?.decode(data) { (response: SendVerificationCodeResponse) in
+                                    self?.decode(data) { (response: VerificationCodeResponse) in
                                         if let error = response.error {
                                             if (Int(error.code) == CashCoreErrorCode.sessionTimeout.rawValue) {
                                                 self?.sendVerificationCode(first: name, surname: last, phoneNumber: phoneNumber, email: email, result: { (res) in

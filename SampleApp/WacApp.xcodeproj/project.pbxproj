@@ -29,6 +29,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B32A77312524BD8C00F1B101 /* cash-sdk-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "cash-sdk-ios"; path = ..; sourceTree = "<group>"; };
 		B36208322453CE7800D6A566 /* WacApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WacApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B36208352453CE7800D6A566 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B36208392453CE7800D6A566 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,7 +37,6 @@
 		B362083E2453CE7A00D6A566 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B36208412453CE7A00D6A566 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B36208432453CE7A00D6A566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B38AB45D24C67B1E00C71B8A /* CashCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CashCore; path = ../CashCore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +54,7 @@
 		B36208292453CE7800D6A566 = {
 			isa = PBXGroup;
 			children = (
-				B38AB45D24C67B1E00C71B8A /* CashCore */,
+				B32A77312524BD8C00F1B101 /* cash-sdk-ios */,
 				B36208342453CE7800D6A566 /* WacApp */,
 				B36208332453CE7800D6A566 /* Products */,
 				B38AB45E24C67B7700C71B8A /* Frameworks */,

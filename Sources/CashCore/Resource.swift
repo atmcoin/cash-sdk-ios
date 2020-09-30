@@ -1,10 +1,11 @@
 
 public enum HTTPMethod: String {
-    case get = "GET"
-    case post = "POST"
+    case GET
+    case POST
 }
 
 public enum Resource {
+    // Redeem
     case checkCodeStatus(String)
     case createCode
     case getAtmList
@@ -13,22 +14,31 @@ public enum Resource {
     case login
     case sendVerificationCode
     
-    public var resource: (method: HTTPMethod, route: String) {
+    public var method: HTTPMethod {
+        switch self {
+        case .checkCodeStatus, .getAtmList, .getAtmListByLocation, .isSessionValid:
+            return HTTPMethod.GET
+        case .createCode, .login, .sendVerificationCode:
+            return HTTPMethod.POST
+        }
+    }
+    
+    public var path: String {
         switch self {
         case .checkCodeStatus(let pcode):
-            return (.get, "/atm/wac/pcode/\(pcode)")
+            return "/atm/wac/pcode/\(pcode)"
         case .createCode:
-            return (.post, "/atm/wac/pcode")
+            return "/atm/wac/pcode"
         case .getAtmList:
-            return (.get, "/atm/wac/atm/list")
+            return "/atm/wac/atm/list"
         case .getAtmListByLocation(let lat, let long):
-            return (.get, "/atm/wac/atm/near/latlon/\(lat)/\(long)")
+            return "/atm/wac/atm/near/latlon/\(lat)/\(long)"
         case .isSessionValid:
-            return (.get, "/atm/auth/user")
+            return "/atm/auth/user"
         case .login:
-            return (.post, "/atm/wac/guest/login")
+            return "/atm/wac/guest/login"
         case .sendVerificationCode:
-            return (.post, "/atm/wac/pcode/verify")
+            return "/atm/wac/pcode/verify"
         }
     }
 }

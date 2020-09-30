@@ -59,5 +59,5 @@ protocol EndPoints {
     ///   - phoneNumber: the phone number of the user initiating the transaction where the code may be sent
     ///   - email: the email of the user initiating the transaction where the code may be sent
     ///   - result: callback with the data object or error from the response
-    func sendVerificationCode(first name: String, surname last: String, phoneNumber: String, email: String, result: @escaping (Result<SendVerificationCodeResponse, CashCoreError>) -> Void)
+    func sendVerificationCode(first name: String, surname last: String, phoneNumber: String, email: String, result: @escaping (Result<VerificationCodeResponse, CashCoreError>) -> Void)
 }
