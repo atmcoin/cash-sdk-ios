@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B32A77332524D01400F1B101 /* support.json in Resources */ = {isa = PBXBuildFile; fileRef = B32A77322524D01300F1B101 /* support.json */; };
 		B36208362453CE7800D6A566 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36208352453CE7800D6A566 /* AppDelegate.swift */; };
-		B362083A2453CE7800D6A566 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36208392453CE7800D6A566 /* ViewController.swift */; };
+		B362083A2453CE7800D6A566 /* RedeemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36208392453CE7800D6A566 /* RedeemViewController.swift */; };
 		B362083D2453CE7800D6A566 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B362083B2453CE7800D6A566 /* Main.storyboard */; };
 		B362083F2453CE7A00D6A566 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B362083E2453CE7A00D6A566 /* Assets.xcassets */; };
 		B36208422453CE7A00D6A566 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B36208402453CE7A00D6A566 /* LaunchScreen.storyboard */; };
+		B36D388C25265E0000B8DC17 /* SupportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36D388B25265E0000B8DC17 /* SupportTableViewController.swift */; };
+		B36D388E2526611D00B8DC17 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36D388D2526611D00B8DC17 /* TabBarViewController.swift */; };
+		B36D389025266EB900B8DC17 /* TopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36D388F25266EB900B8DC17 /* TopicViewController.swift */; };
 		B38AB46024C67B7700C71B8A /* CashCore in Frameworks */ = {isa = PBXBuildFile; productRef = B38AB45F24C67B7700C71B8A /* CashCore */; };
 /* End PBXBuildFile section */
 
@@ -29,14 +33,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B32A77312524BD8C00F1B101 /* cash-sdk-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "cash-sdk-ios"; path = ..; sourceTree = "<group>"; };
+		B32A77322524D01300F1B101 /* support.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = support.json; sourceTree = "<group>"; };
 		B36208322453CE7800D6A566 /* WacApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WacApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B36208352453CE7800D6A566 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B36208392453CE7800D6A566 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B36208392453CE7800D6A566 /* RedeemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemViewController.swift; sourceTree = "<group>"; };
 		B362083C2453CE7800D6A566 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B362083E2453CE7A00D6A566 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B36208412453CE7A00D6A566 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B36208432453CE7A00D6A566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B38AB45D24C67B1E00C71B8A /* CashCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CashCore; path = ../CashCore; sourceTree = "<group>"; };
+		B36D388B25265E0000B8DC17 /* SupportTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportTableViewController.swift; sourceTree = "<group>"; };
+		B36D388D2526611D00B8DC17 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		B36D388F25266EB900B8DC17 /* TopicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +62,7 @@
 		B36208292453CE7800D6A566 = {
 			isa = PBXGroup;
 			children = (
-				B38AB45D24C67B1E00C71B8A /* CashCore */,
+				B32A77312524BD8C00F1B101 /* cash-sdk-ios */,
 				B36208342453CE7800D6A566 /* WacApp */,
 				B36208332453CE7800D6A566 /* Products */,
 				B38AB45E24C67B7700C71B8A /* Frameworks */,
@@ -72,12 +80,16 @@
 		B36208342453CE7800D6A566 /* WacApp */ = {
 			isa = PBXGroup;
 			children = (
+				B32A77322524D01300F1B101 /* support.json */,
 				B36208352453CE7800D6A566 /* AppDelegate.swift */,
-				B36208392453CE7800D6A566 /* ViewController.swift */,
 				B362083B2453CE7800D6A566 /* Main.storyboard */,
 				B362083E2453CE7A00D6A566 /* Assets.xcassets */,
 				B36208402453CE7A00D6A566 /* LaunchScreen.storyboard */,
 				B36208432453CE7A00D6A566 /* Info.plist */,
+				B36D388D2526611D00B8DC17 /* TabBarViewController.swift */,
+				B36208392453CE7800D6A566 /* RedeemViewController.swift */,
+				B36D388B25265E0000B8DC17 /* SupportTableViewController.swift */,
+				B36D388F25266EB900B8DC17 /* TopicViewController.swift */,
 			);
 			path = WacApp;
 			sourceTree = "<group>";
@@ -153,6 +165,7 @@
 			files = (
 				B36208422453CE7A00D6A566 /* LaunchScreen.storyboard in Resources */,
 				B362083F2453CE7A00D6A566 /* Assets.xcassets in Resources */,
+				B32A77332524D01400F1B101 /* support.json in Resources */,
 				B362083D2453CE7800D6A566 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,7 +177,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B362083A2453CE7800D6A566 /* ViewController.swift in Sources */,
+				B36D388E2526611D00B8DC17 /* TabBarViewController.swift in Sources */,
+				B36D388C25265E0000B8DC17 /* SupportTableViewController.swift in Sources */,
+				B362083A2453CE7800D6A566 /* RedeemViewController.swift in Sources */,
+				B36D389025266EB900B8DC17 /* TopicViewController.swift in Sources */,
 				B36208362453CE7800D6A566 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
