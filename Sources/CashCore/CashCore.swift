@@ -17,6 +17,7 @@ public class ServerEndpoints: EndPoints  {
     public var sessionKey: String = ""
     private var requestManager: Request
     private var listener: SessionCallback?
+    public var support: Support?
     
     private var headers: [String: String] {
         get {
@@ -30,13 +31,17 @@ public class ServerEndpoints: EndPoints  {
     public init(url: EnvironmentUrl = .Production) {
         requestManager = Request.init(url: url.rawValue)
     }
-    
+   
+}
+
+// MARK: Redeem Flow
+extension ServerEndpoints {
     
     /// Generic way of decoding data responses
     /// - Parameters:
     ///   - data: the data to be decoded
     ///   - completion: the completion block that handles the Object in the response
-    func decode<T:Decodable>(_ data: Data, completion: @escaping (T) -> ()) {
+    private func decode<T:Decodable>(_ data: Data, completion: @escaping (T) -> ()) {
         let object: Response = try! JSONDecoder().decode(T.self, from: data) as! Response
         if let error = object.error {
             // When session key has timed out, refresh the token and try again.
@@ -240,4 +245,23 @@ public class ServerEndpoints: EndPoints  {
         createSession(self.listener!)
     }
     
+}
+
+// MARK: Support Pages
+extension ServerEndpoints {
+    
+    public func loadJson(fileName: String, bundle: Bundle? = Bundle.main) {
+        let decoder = JSONDecoder()
+        guard let url = bundle!.url(forResource: fileName, withExtension: "json") else {
+            return
+        }
+        do {
+            let data = try Data(contentsOf: url)
+            let support = try decoder.decode(Support.self, from: data)
+            self.support = support
+        } catch (let exception) {
+            print("Exception: Parsing support pages json failed with \(exception)")
+            return
+        }
+    }
 }

@@ -2,9 +2,9 @@
 import UIKit
 import CashCore
 
-class ViewController: UIViewController, SessionCallback {
+class RedeemViewController: UIViewController, SessionCallback {
     
-    private var client: ServerEndpoints!
+    public var client: ServerEndpoints!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -92,7 +92,6 @@ class ViewController: UIViewController, SessionCallback {
     }
     
     @IBAction func createSession(_ sender: Any) {
-        client = ServerEndpoints.init()
         let listener = self
         client.createSession(listener)
         
