@@ -68,4 +68,5 @@ public enum CodeStatus: String, CaseIterable {
     case FUNDED = "V"
     case USED = "U"
     case CANCELLED = "C"
+    case ERROR = "E"
 }
