@@ -13,22 +13,22 @@ public struct AtmItems: Codable {
 
 /*
  {
-     "atm_id": "5004",
-     "address_desc": "Target Lake Park",
-     "address_street": "500 N Congress Ave",
+     "atm_id": 8,
+     "address_desc": "Dragon Mart",
+     "address_street": "3201 N Lamar Blvd",
      "address_detail": null,
-     "address_city": "Lake Park",
-     "address_state": "FL",
-     "address_zip": "33403",
-     "loc_lon": "-80.0830290",
-     "loc_lat": "26.8053350",
-     "atm_desc": "test_FLL",
-     "atm_fees": "0.00",
-     "atm_min": "20.00",
-     "atm_max": "600.00",
-     "atm_bills": "20.00",
+     "address_city": "Austin",
+     "address_state": "TX",
+     "address_zip": "78705",
+     "loc_lon": -97.7473528,
+     "loc_lat": 30.3015207,
+     "atm_desc": "Dragon Mart",
+     "atm_min": 20.0,
+     "atm_max": 300.0,
+     "atm_bills": 20.0,
      "atm_currency": "USD",
-     "atm_red": "1"
+     "atm_pur": 1,
+     "atm_red": 0
  }
  */
 public struct AtmMachine: Codable {
@@ -48,6 +48,7 @@ public struct AtmMachine: Codable {
     public let bills: String?
     public let currency: String?
     public let redemption: String?
+    public let purchase: String?
 
     enum CodingKeys: String, CodingKey {
         case atmId = "atm_id"
@@ -66,5 +67,6 @@ public struct AtmMachine: Codable {
         case bills = "atm_bills"
         case currency = "atm_currency"
         case redemption = "atm_red"
+        case purchase = "atm_pur"
     }
 }

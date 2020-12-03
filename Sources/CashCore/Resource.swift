@@ -26,19 +26,19 @@ public enum Resource {
     public var path: String {
         switch self {
         case .checkCodeStatus(let pcode):
-            return "/atm/wac/pcode/\(pcode)"
+            return "/wac/wac/pcode/\(pcode)"
         case .createCode:
-            return "/atm/wac/pcode"
+            return "/wac/wac/pcode"
         case .getAtmList:
-            return "/atm/wac/atm/list"
+            return "/wac/wac/atm/list"
         case .getAtmListByLocation(let lat, let long):
-            return "/atm/wac/atm/near/latlon/\(lat)/\(long)"
+            return "/wac/wac/atm/near/latlon/\(lat)/\(long)"
         case .isSessionValid:
-            return "/atm/auth/user"
+            return "/wac/auth/user"
         case .login:
-            return "/atm/wac/guest/login"
+            return "/wac/wac/guest/login"
         case .sendVerificationCode:
-            return "/atm/wac/pcode/verify"
+            return "/wac/wac/pcode/verify"
         }
     }
 }
