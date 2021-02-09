@@ -250,9 +250,10 @@ extension ServerEndpoints {
 // MARK: Support Pages
 extension ServerEndpoints {
     
-    public func loadJson(fileName: String, bundle: Bundle? = Bundle.main) {
+    public func loadJson(fileName: String, bundle: Bundle? = nil) {
         let decoder = JSONDecoder()
-        guard let url = bundle!.url(forResource: fileName, withExtension: "json") else {
+        let bundl = bundle ?? Bundle.module
+        guard let url = bundl.url(forResource: fileName, withExtension: "json") else {
             return
         }
         do {
