@@ -210,10 +210,11 @@ extension ServerEndpoints {
     }
     
     public func sendVerificationCode(first name: String, surname last: String, phoneNumber: String, email: String, result: @escaping (Result<VerificationCodeResponse, CashCoreError>) -> Void) {
-        let params: [String : String] = ["first_name": name,
+        let params: [String : Any] = ["first_name": name,
                                          "last_name": last,
                                          "phone_number": phoneNumber,
-                                         "email": email]
+                                         "email": email,
+                                         "word_code": 1]
         requestManager.request(.sendVerificationCode,
                                body: params,
                                headers: headers) { [weak self] res in

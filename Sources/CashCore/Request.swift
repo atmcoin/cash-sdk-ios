@@ -17,7 +17,7 @@ class Request {
     
     func request(_ resource: Resource,
                  query: [String: String] = [:],
-                 body: [String: String] = [:],
+                 body: [String: Any] = [:],
                  headers: [String: String] = [:],
                  completion: @escaping (Result<Data, CashCoreError>) -> Void) {
         
