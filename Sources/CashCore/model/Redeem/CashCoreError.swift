@@ -5,6 +5,10 @@ public enum CashCoreErrorCode: Int {
     // Server Defined End Point Errors
     case sessionTimeout = 105
     
+    case wrongVerificationCode = 2001
+    case tooManyVerificationCodeAttempts = 2002
+    case verificationCodeExpired = 2003
+    
     // Local Defined End Point Errors
     case invalidEndPoint = 20001    // A 
     case invalidResponse = 20002
