@@ -1,7 +1,7 @@
 
 import Foundation
 
-protocol Response {
+public protocol Response {
     var result: String { get }
     var error: CashCoreError? { get }
 }

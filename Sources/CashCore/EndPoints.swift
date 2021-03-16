@@ -1,8 +1,6 @@
 
 import Foundation
 
-
-/// The End Points for the redeem flow with the Crypto Server
 protocol EndPoints {
     
     /// Creates a session key to be passed on the header of other endpoint requests.
@@ -15,7 +13,7 @@ protocol EndPoints {
     ///   for interaction with the server. It is weird how the key acts; instead of providing
     ///   an authorization bearer for a user, any session key created can be used to invoke
     ///   API calls to the server
-    func createSession(_ listener: SessionCallback)
+    func createGuestSession(_ listener: SessionCallback)
     
     /// Creates a secure cash code that identifies the transaction with the server.
     /// - Parameters:
@@ -48,9 +46,8 @@ protocol EndPoints {
     
     /// Validates a session key
     /// - Parameters:
-    ///   - sessionKey: the session key to validate
     ///   - completion: the block to be executed upon response
-    func isSessionValid(_ sessionKey: String, completion: @escaping ((Bool) -> ()))
+    func isSessionValid(completion: @escaping ((Bool) -> ()))
     
     /// Sends a SMS or eMail verification code
     /// - Parameters:
@@ -60,4 +57,24 @@ protocol EndPoints {
     ///   - email: the email of the user initiating the transaction where the code may be sent
     ///   - result: callback with the data object or error from the response
     func sendVerificationCode(first name: String, surname last: String, phoneNumber: String, email: String, result: @escaping (Result<VerificationCodeResponse, CashCoreError>) -> Void)
+    
+    /// Validates a session key
+    /// - Parameters:
+    ///   - completion: the block to be executed upon response
+    func login(phone number: String, result: @escaping(Result<Response, CashCoreError>) -> Void)
+    
+    /// Validates a session key
+    /// - Parameters:
+    ///   - completion: the block to be executed upon response
+    func loginConfirmation(verification code: String, result: @escaping(Result<Response, CashCoreError>) -> Void)
+    
+    /// Validates a session key
+    /// - Parameters:
+    ///   - completion: the block to be executed upon response
+    func register(first name: String, surname last: String, phone number: String, result: @escaping(Result<Response, CashCoreError>) -> Void)
+    
+    /// Validates a session key
+    /// - Parameters:
+    ///   - completion: the block to be executed upon response
+    func getKYCStatus(result: @escaping(Result<KYCStatusResponse, CashCoreError>) -> Void)
 }

@@ -2,14 +2,13 @@
 import UIKit
 import CashCore
 
-class RedeemViewController: UIViewController, SessionCallback {
+class RedeemViewController: UIViewController {
     
     public var client: ServerEndpoints!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
-    
-    @IBOutlet weak var sessionKeyLabel: UILabel!
+
     // ATM List
     @IBOutlet weak var atmListButton: UIButton!
     @IBOutlet weak var latitudeTextField: UITextField!
@@ -43,6 +42,15 @@ class RedeemViewController: UIViewController, SessionCallback {
         self.sendButton.isEnabled = false
         self.createCodeSendButton.isEnabled = false
         self.checkPCodeButton.isEnabled = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if client.sessionKey.isEmpty {
+            self.showAlert("Error", message: "Please create a session under the redemption view")
+        } else {
+            toggleViewsAfterLogin(true)
+        }
     }
     
     func toggleViewsAfterLogin(_ enabled: Bool) {
@@ -89,13 +97,6 @@ class RedeemViewController: UIViewController, SessionCallback {
                 break
             }
         }
-    }
-    
-    @IBAction func createSession(_ sender: Any) {
-        let listener = self
-        client.createSession(listener)
-        
-        toggleViewsAfterLogin(true)
     }
     
     @IBAction func getAtmListBy(_ sender: Any) {
@@ -149,17 +150,6 @@ class RedeemViewController: UIViewController, SessionCallback {
         }
     }
     
-    // Login Protocol Implementation
-    
-    func onSessionCreated(_ sessionKey: String) {
-        print(sessionKey)
-        self.sessionKeyLabel.text = sessionKey
-    }
-    
-    func onError(_ error: CashCoreError?) {
-        showAlert("Error", message: (error?.message)!)
-    }
-    
     // Enforce certain fields to have content
     
     @IBAction func textDidChangeAtmList(_ sender: Any) {
@@ -204,14 +194,6 @@ class RedeemViewController: UIViewController, SessionCallback {
         else {
             self.checkPCodeButton.isEnabled = false
         }
-    }
-    
-    func showAlert(_ title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-            
-        }))
-        self.present(alert, animated: true, completion: nil)
     }
     
     // Keyboard

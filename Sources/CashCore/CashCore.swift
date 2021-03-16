@@ -12,14 +12,20 @@ public enum EnvironmentUrl: String {
     case Production = "https://api-prd.just.cash"
 }
 
-public class ServerEndpoints: EndPoints  {
+public class ServerEndpoints  {
     
     public var sessionKey: String = ""
-    private var requestManager: Request
-    private var listener: SessionCallback?
+    var requestManager: Request
+    var listener: SessionCallback?
+    public var phoneNumber: String?
     public var support: Support?
+    lazy var secureStore: SecureStore = {
+        let secureStoreQueryable = GenericPasswordQueryable.init(service: "Login")
+        let store = SecureStore.init(secureStoreQueryable: secureStoreQueryable)
+        return store
+    }()
     
-    private var headers: [String: String] {
+    public var headers: [String: String] {
         get {
             return [
                 "Content-Type": "application/json",
@@ -31,17 +37,12 @@ public class ServerEndpoints: EndPoints  {
     public init(url: EnvironmentUrl = .Production) {
         requestManager = Request.init(url: url.rawValue)
     }
-   
-}
-
-// MARK: Redeem Flow
-extension ServerEndpoints {
     
     /// Generic way of decoding data responses
     /// - Parameters:
     ///   - data: the data to be decoded
     ///   - completion: the completion block that handles the Object in the response
-    private func decode<T:Decodable>(_ data: Data, completion: @escaping (T) -> ()) {
+    public func decode<T:Decodable>(_ data: Data, completion: @escaping (T) -> ()) {
         let object: Response = try! JSONDecoder().decode(T.self, from: data) as! Response
         if let error = object.error {
             // When session key has timed out, refresh the token and try again.
@@ -58,212 +59,94 @@ extension ServerEndpoints {
         }
     }
     
-    // API
-    
-    public func createCashCode(_ atmId: String, _ amount: String, _ verificationCode: String, result: @escaping (Result<CashCodeResponse, CashCoreError>) -> Void) {
-        let params = ["atm_id": atmId,
-                      "amount": amount,
-                      "verification_code": verificationCode]
-        
-        requestManager.request(.createCode,
-                               body: params,
-                               headers: headers) { [weak self] res in
-                                switch res {
-                                case .success(let data):
-                                    self?.decode(data) { (response: CashCodeResponse) in
-                                        if let error = response.error {
-                                            if (Int(error.code) == CashCoreErrorCode.sessionTimeout.rawValue) {
-                                                self?.createCashCode(atmId, amount, verificationCode, result: result)
-                                                return;
-                                            }
-                                            result(.failure(error))
-                                        }
-                                        else {
-                                            result(.success(response))
-                                        }
-                                    }
-                                    break
-                                case .failure(let error):
-                                    result(.failure(error))
-                                    break
-                                }
-        }
-    }
-    
-    public func checkCashCodeStatus(_ code: String, result: @escaping (Result<CashCodeStatusResponse, CashCoreError>) -> Void) {
-        requestManager.request(.checkCodeStatus(code),
-                               headers: headers) { [weak self] res in
-                                switch res {
-                                case .success(let data):
-                                    self?.decode(data) { (response: CashCodeStatusResponse) in
-                                        if let error = response.error {
-                                            if (Int(error.code) == CashCoreErrorCode.sessionTimeout.rawValue) {
-                                                self?.checkCashCodeStatus(code, result: { (res) in
-                                                    result(res)
-                                                })
-                                                return
-                                            }
-                                            result(.failure(error))
-                                        }
-                                        else {
-                                            result(.success(response))
-                                        }
-                                    }
-                                    break
-                                case .failure(let error):
-                                    result(.failure(error))
-                                    break
-                                }
-        }
-    }
-    
-    public func createSession(_ listener: SessionCallback) {
-        self.listener = listener
-        requestManager.request(.login,
-                               headers: headers) { [weak self] res in
-                                switch res {
-                                case .success(let data):
-                                    self?.decode(data) { (response: LoginResponse) in
-                                        if let error = response.error {
-                                            listener.onError(error)
-                                            return;
-                                        }
-                                        if let session = response.data.sessionKey {
-                                            self?.sessionKey = session
-                                            listener.onSessionCreated(session)
-                                        }
-                                    }
-                                    break
-                                case .failure(let error):
-                                    listener.onError(error)
-                                    break
-                                }
-        }
-    }
-    
-    public func getAtmList(result: @escaping (Result<AtmListResponse, CashCoreError>) -> Void) {
-        requestManager.request(.getAtmList,
-                               headers: headers) { [weak self] res in
-                                switch res {
-                                case .success(let data):
-                                    self?.decode(data) { (response: AtmListResponse) in
-                                        if let error = response.error {
-                                            if (Int(error.code) == CashCoreErrorCode.sessionTimeout.rawValue) {
-                                                self?.getAtmList(result: { (res) in
-                                                    result(res)
-                                                })
-                                                return
-                                            }
-                                            result(.failure(error))
-                                        }
-                                        else {
-                                            result(.success(response))
-                                        }
-                                    }
-                                    break
-                                case .failure(let error):
-                                    result(.failure(error))
-                                    break
-                                }
-        }
-    }
-    
-    public func getAtmListByLocation(_ latitude: String, _ longitude: String, result: @escaping (Result<AtmListResponse, CashCoreError>) -> Void) {
-        requestManager.request(.getAtmListByLocation(latitude, longitude),
-                               headers: headers) { [weak self] res in
-                                switch res {
-                                case .success(let data):
-                                    self?.decode(data) { (response: AtmListResponse) in
-                                        if let error = response.error {
-                                            if (Int(error.code) == CashCoreErrorCode.sessionTimeout.rawValue) {
-                                                self?.getAtmListByLocation(latitude, longitude, result: { (res) in
-                                                    result(res)
-                                                })
-                                                return
-                                            }
-                                            result(.failure(error))
-                                        }
-                                        else {
-                                            result(.success(response))
-                                        }
-                                    }
-                                    break
-                                case .failure(let error):
-                                    result(.failure(error))
-                                    break
-                                }
-        }
-    }
-    
-    public func isSessionValid(_ sessionKey: String, completion: @escaping ((Bool) -> ())) {
-        requestManager.request(.isSessionValid,
-                               headers: headers) { res in
-                                switch res {
-                                case .success(_):
-                                    completion(true)
-                                    break
-                                case .failure(_):
-                                    completion(false)
-                                    break
-                                }
-        }
-    }
-    
-    public func sendVerificationCode(first name: String, surname last: String, phoneNumber: String, email: String, result: @escaping (Result<VerificationCodeResponse, CashCoreError>) -> Void) {
-        let params: [String : Any] = ["first_name": name,
-                                         "last_name": last,
-                                         "phone_number": phoneNumber,
-                                         "email": email,
-                                         "word_code": 1]
-        requestManager.request(.sendVerificationCode,
-                               body: params,
-                               headers: headers) { [weak self] res in
-                                switch res {
-                                case .success(let data):
-                                    self?.decode(data) { (response: VerificationCodeResponse) in
-                                        if let error = response.error {
-                                            if (Int(error.code) == CashCoreErrorCode.sessionTimeout.rawValue) {
-                                                self?.sendVerificationCode(first: name, surname: last, phoneNumber: phoneNumber, email: email, result: { (res) in
-                                                    result(res)
-                                                })
-                                                return
-                                            }
-                                            result(.failure(error))
-                                        }
-                                        else {
-                                            result(.success(response))
-                                        }
-                                    }
-                                    break
-                                case .failure(let error):
-                                    result(.failure(error))
-                                    break
-                                }
-        }
-    }
-    
-    private func handleSessionExpiry(_ error: CashCoreError, completion: @escaping (()-> Void)) {
-        createSession(self.listener!)
-    }
-    
 }
 
-// MARK: Support Pages
+// MARK: Helpers
 extension ServerEndpoints {
     
-    public func loadJson(fileName: String, bundle: Bundle? = nil) {
-        let decoder = JSONDecoder()
-        let bundl = bundle ?? Bundle.module
-        guard let url = bundl.url(forResource: fileName, withExtension: "json") else {
+    public func handleSessionExpiry(_ error: CashCoreError, completion: @escaping (()-> Void)) {
+        // On session expiry - error code 105:
+        //  1. get a session key through guest login
+        //  2. login with phone number - Do not do for now
+        //  3. confirm with code - Do not do for now
+        
+        // If session expires, we can only renew a guest session. Logout to remove keychain session
+        self.logout() { [weak self] _ in
+            self?.createSession(self?.listener) { _ in
+                completion()
+            }
+        }
+    }
+    
+    public func getUserStatus(completion: @escaping (KYCStatus) -> Void) {
+        if !hasSession() {
+            return completion(.guest)
+        }
+        getKYCDocuments() { result in
+            switch result {
+            case .success(let response):
+                guard let documents = response.data?.items else {
+                    completion(.notValid(message: "Error: kyc/status items was nil"))
+                    return
+                }
+                if documents.count == 0 {
+                    // Have not uploaded any documents
+                    completion(.notVerified)
+                    return
+                }
+                for doc in documents {
+                    if doc.getDocumentStatus() == .pending {
+                        // At least one of the documents is Pending
+                        completion(.verifying)
+                        return
+                    }
+                    if doc.getDocumentStatus() == .rejected {
+                        // At least one of the documents got rejected
+                        completion(.rejected)
+                        return
+                    }
+                }
+                // All documents have been accepted
+                completion(.verified)
+                
+            case .failure(_):
+                // Response Error
+                completion(.notValid(message: "Error: kyc/status response failure"))
+                break
+            }
+        }
+    }
+    
+    public func getUserStatusSimplified(completion: @escaping (KYCStatus) -> Void) {
+        if !hasSession() {
+            completion(.guest)
             return
         }
-        do {
-            let data = try Data(contentsOf: url)
-            let support = try decoder.decode(Support.self, from: data)
-            self.support = support
-        } catch (let exception) {
-            print("Exception: Parsing support pages json failed with \(exception)")
-            return
+        getKYCStatus() { result in
+            switch result {
+            case .success(let response):
+                guard let documents: KYCItem = response.data?.items.first else {
+                    completion(.notValid(message: "Error: kyc/status items was nil"))
+                    return
+                }
+                if documents.getKYCDocumentsStatus() == KYCDocumentsStatus.new {
+                    completion(.notVerified)
+                    return
+                }
+                if documents.getKYCDocumentsStatus() == KYCDocumentsStatus.verified {
+                    completion(.verified)
+                    return
+                }
+                if documents.getKYCDocumentsStatus() == KYCDocumentsStatus.rejected {
+                    completion(.rejected)
+                    return
+                }
+            case .failure(_):
+                // Response Error
+                completion(.notValid(message: "Error: kyc/status response failure"))
+                break
+            }
         }
     }
 }
+   
