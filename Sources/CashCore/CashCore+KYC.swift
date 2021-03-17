@@ -9,6 +9,10 @@ extension ServerEndpoints {
                                       "last_name": last,
                                       "phone_number": number]
         
+        self.userData = [kFirstName: name,
+                         kLastName: last,
+                         kPhoneNumber: number]
+        
         requestManager.request(KYC.register,
                                body: params,
                                headers: headers) { [weak self] res in

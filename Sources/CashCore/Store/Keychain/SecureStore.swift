@@ -9,9 +9,13 @@ public struct SecureStore {
         self.secureStoreQueryable = secureStoreQueryable
     }
     
-    public func setValue(_ value: String, for userAccount: String) throws {
-        guard let encodedPassword = value.data(using: .utf8) else {
-            throw SecureStoreError.string2DataConversionError
+    public func setValue(_ value: [AnyHashable: String], for userAccount: String) throws {
+        var data: Data
+        do {
+            data = try NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: true)
+        }
+        catch {
+            throw SecureStoreError.conversionError(message: "Archiving error converting value \(value)")
         }
         
         var query = secureStoreQueryable.query
@@ -21,7 +25,7 @@ public struct SecureStore {
         switch status {
         case errSecSuccess:
             var attributesToUpdate: [String: Any] = [:]
-            attributesToUpdate[String(kSecValueData)] = encodedPassword
+            attributesToUpdate[String(kSecValueData)] = data
             
             status = SecItemUpdate(query as CFDictionary,
                                    attributesToUpdate as CFDictionary)
@@ -29,7 +33,7 @@ public struct SecureStore {
                 throw error(from: status)
             }
         case errSecItemNotFound:
-            query[String(kSecValueData)] = encodedPassword
+            query[String(kSecValueData)] = data
             
             status = SecItemAdd(query as CFDictionary, nil)
             if status != errSecSuccess {
@@ -41,7 +45,7 @@ public struct SecureStore {
         
     }
     
-    public func getValue(for userAccount: String) throws -> String? {
+    public func getValue(for userAccount: String) throws -> [AnyHashable: String]? {
         var query = secureStoreQueryable.query
         query[String(kSecMatchLimit)] = kSecMatchLimitOne
         query[String(kSecReturnAttributes)] = kCFBooleanTrue
@@ -57,12 +61,12 @@ public struct SecureStore {
         case errSecSuccess:
             guard
                 let queriedItem = queryResult as? [String: Any],
-                let passwordData = queriedItem[String(kSecValueData)] as? Data,
-                let password = String(data: passwordData, encoding: .utf8)
+                let data = queriedItem[String(kSecValueData)] as? Data,
+                let value = NSKeyedUnarchiver.unarchiveObject(with: data)
             else {
-                throw SecureStoreError.data2StringConversionError
+                throw SecureStoreError.conversionError(message: "")
             }
-            return password
+            return value as? [AnyHashable: String]
         case errSecItemNotFound:
             return nil
         default:

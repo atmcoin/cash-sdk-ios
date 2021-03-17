@@ -743,8 +743,20 @@
                                                             <outlet property="delegate" destination="Tvv-xX-ZzK" id="rhz-KQ-y6d"/>
                                                         </connections>
                                                     </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nZF-Mw-REn">
+                                                        <rect key="frame" x="253" y="141" width="47" height="32"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="32" id="TiW-rK-NVv"/>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="gaG-Rw-TsT"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                        <state key="normal" title="logout"/>
+                                                        <connections>
+                                                            <action selector="logoutButtonPressed:" destination="Tvv-xX-ZzK" eventType="touchUpInside" id="ycB-g8-leh"/>
+                                                        </connections>
+                                                    </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESn-Bx-A2q">
-                                                        <rect key="frame" x="156.5" y="141" width="62" height="32"/>
+                                                        <rect key="frame" x="68" y="141" width="62" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="32" id="rDe-fA-MxF"/>
                                                         </constraints>
@@ -763,13 +775,16 @@
                                                     <constraint firstItem="dDc-uo-Ug2" firstAttribute="leading" secondItem="ei2-eD-WYg" secondAttribute="leading" constant="20" id="AGh-GL-qq3"/>
                                                     <constraint firstItem="1HK-g9-rNq" firstAttribute="top" secondItem="ei2-eD-WYg" secondAttribute="top" id="F6V-pX-loJ"/>
                                                     <constraint firstAttribute="bottom" secondItem="ESn-Bx-A2q" secondAttribute="bottom" constant="10" id="JGq-BU-zFf"/>
+                                                    <constraint firstItem="ESn-Bx-A2q" firstAttribute="centerX" secondItem="dDc-uo-Ug2" secondAttribute="centerX" id="Jre-mQ-QYF"/>
                                                     <constraint firstItem="eM1-Ok-jD1" firstAttribute="top" secondItem="ei2-eD-WYg" secondAttribute="top" constant="43" id="Jxz-FZ-wJk"/>
                                                     <constraint firstItem="Mez-ZU-TC3" firstAttribute="leading" secondItem="dDc-uo-Ug2" secondAttribute="trailing" priority="250" constant="20" id="Ka2-pZ-JxF"/>
-                                                    <constraint firstItem="ESn-Bx-A2q" firstAttribute="centerX" secondItem="ei2-eD-WYg" secondAttribute="centerX" id="QLP-DR-UJx"/>
                                                     <constraint firstItem="Mez-ZU-TC3" firstAttribute="width" secondItem="dDc-uo-Ug2" secondAttribute="width" id="SaU-Lc-obw"/>
                                                     <constraint firstAttribute="height" constant="183" id="Uqj-rT-VWr"/>
                                                     <constraint firstItem="eM1-Ok-jD1" firstAttribute="leading" secondItem="ei2-eD-WYg" secondAttribute="leading" constant="20" id="YPf-Q3-PGU"/>
                                                     <constraint firstItem="EcQ-i6-Gzd" firstAttribute="leading" secondItem="ei2-eD-WYg" secondAttribute="leading" id="Yn7-1M-bRG"/>
+                                                    <constraint firstItem="nZF-Mw-REn" firstAttribute="top" secondItem="Mez-ZU-TC3" secondAttribute="bottom" constant="20" id="aVP-eI-mv1"/>
+                                                    <constraint firstAttribute="bottom" secondItem="nZF-Mw-REn" secondAttribute="bottom" constant="10" id="cA5-lI-y1H"/>
+                                                    <constraint firstItem="nZF-Mw-REn" firstAttribute="centerX" secondItem="Mez-ZU-TC3" secondAttribute="centerX" id="cr3-pc-mfs"/>
                                                     <constraint firstItem="EcQ-i6-Gzd" firstAttribute="top" secondItem="ei2-eD-WYg" secondAttribute="top" constant="-10" id="gX0-DK-jOP"/>
                                                     <constraint firstItem="Mez-ZU-TC3" firstAttribute="centerY" secondItem="dDc-uo-Ug2" secondAttribute="centerY" id="juL-Zu-pOg"/>
                                                     <constraint firstAttribute="trailing" secondItem="bPi-GP-gSv" secondAttribute="trailing" constant="20" id="lmF-x1-MpJ"/>
@@ -934,6 +949,7 @@
                         <outlet property="firstNameTextField" destination="eM1-Ok-jD1" id="16j-0L-64K"/>
                         <outlet property="lastNameTextField" destination="bPi-GP-gSv" id="FxB-W4-xmR"/>
                         <outlet property="loginConfirmationButton" destination="PG6-BF-HCG" id="fxN-aa-ozV"/>
+                        <outlet property="logoutButton" destination="nZF-Mw-REn" id="jye-Zb-nvc"/>
                         <outlet property="phoneNumberTextfield" destination="dDc-uo-Ug2" id="EDV-Me-edf"/>
                         <outlet property="registerButton" destination="ESn-Bx-A2q" id="3Ir-Qb-bmT"/>
                         <outlet property="scrollView" destination="ztR-gW-w7h" id="ioQ-9K-Bh5"/>

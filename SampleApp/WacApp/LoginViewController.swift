@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet var phoneNumberTextfield: UITextField!
     @IBOutlet var registerButton: UIButton!
+    @IBOutlet var logoutButton: UIButton!
     
     @IBOutlet var verificationCodeTextfield: UITextField!
     @IBOutlet var loginConfirmationButton: UIButton!
@@ -30,23 +31,47 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector:#selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    private func setTextFieldsInteraction(enabled: Bool, data: [AnyHashable: String]?) {
+        self.phoneNumberTextfield.isUserInteractionEnabled = enabled
+        self.firstNameTextField.isUserInteractionEnabled = enabled
+        self.lastNameTextField.isUserInteractionEnabled = enabled
         
+        self.phoneNumberTextfield.text = enabled ? "" : data![kPhoneNumber]
+        self.firstNameTextField.text = enabled ? "" : data![kFirstName]
+        self.lastNameTextField.text = enabled ? "" : data![kLastName]
+    }
+    
+    private func updateUI() {
         if client.hasSession() {
+            guard let data = client.getData() else {
+                return
+            }
+            setTextFieldsInteraction(enabled: false, data: data)
+            
             self.sessionButton.setTitle("Get Session", for: .normal)
             self.registerButton.setTitle("Login", for: .normal)
             self.registerButton.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
         }
         else {
+            setTextFieldsInteraction(enabled: true, data: nil)
+            
             self.sessionButton.setTitle("Create Session", for: .normal)
             self.registerButton.setTitle("Register", for: .normal)
             self.registerButton.addTarget(self, action: #selector(registerButtonPressed), for: .touchUpInside)
         }
         
+        self.sessionKeyLabel.text = ""
+        self.statusLabel.text = ""
         self.registerButton.isEnabled = false
         self.loginConfirmationButton.isEnabled = false
         self.statusButton.isEnabled = false
+        self.logoutButton.isEnabled = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        updateUI()
     }
     
     @IBAction func createSession(_ sender: Any) {
@@ -82,6 +107,7 @@ class LoginViewController: UIViewController {
                 break
             }
         }
+        self.view.endEditing(true)
     }
     
     @IBAction func registerButtonPressed(_ sender: Any) {
@@ -92,6 +118,20 @@ class LoginViewController: UIViewController {
             switch result {
             case .success(_):
                 self?.showAlert("Success", message: "Enter the verification code sent to you via SMS")
+                break
+            case .failure(let error):
+                self?.showAlert("Error", message: (error.message)!)
+                break
+            }
+        }
+        self.view.endEditing(true)
+    }
+    
+    @IBAction func logoutButtonPressed(_ sender: Any) {
+        client.logout() { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.updateUI()
                 break
             case .failure(let error):
                 self?.showAlert("Error", message: (error.message)!)
@@ -111,9 +151,11 @@ class LoginViewController: UIViewController {
         let code = self.verificationCodeTextfield.text
         if (code != "") {
             self.loginConfirmationButton.isEnabled = true
+            self.logoutButton.isEnabled = true
         }
         else {
             self.loginConfirmationButton.isEnabled = false
+            self.logoutButton.isEnabled = false
         }
     }
     

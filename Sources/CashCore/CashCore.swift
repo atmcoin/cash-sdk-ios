@@ -17,7 +17,7 @@ public class ServerEndpoints  {
     public var sessionKey: String = ""
     var requestManager: Request
     var listener: SessionCallback?
-    public var phoneNumber: String?
+    public var userData: [AnyHashable: String]?
     public var support: Support?
     lazy var secureStore: SecureStore = {
         let secureStoreQueryable = GenericPasswordQueryable.init(service: "Login")

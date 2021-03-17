@@ -42,7 +42,6 @@ extension ServerEndpoints {
     
     public func login(phone number: String, result: @escaping(Result<BaseResponse, CashCoreError>) -> Void) {
         let params: [String : Any] = ["phone_number": number]
-        self.phoneNumber = number
         
         requestManager.request(Authentication.login,
                                body: params,
@@ -90,7 +89,7 @@ extension ServerEndpoints {
                         result(.failure(error))
                     }
                     else {
-                        self?.setSession()
+                        self?.setSession(for: (self?.userData)!)
                         result(.success(response))
                     }
                 }

@@ -3,13 +3,21 @@ import Foundation
 
 private let userAccount = "CNI"
 
+
+public let kFirstName = "firstName"
+public let kLastName = "lastName"
+public let kPhoneNumber = "phoneNumber"
+public let kEmail = "email"
+public let kSessionKey = "sessionKey"
+
 // MARK: Session
 extension ServerEndpoints {
     
-    // TODO: Needs to store the phone number the session is associated to as the user may change the phone number while redeeming
-    public func setSession() {
+    public func setSession(for object: [AnyHashable: String]) {
         do {
-            try self.secureStore.setValue(self.sessionKey, for: userAccount)
+            var dict = object
+            dict.updateValue(self.sessionKey, forKey: kSessionKey)
+            try self.secureStore.setValue(dict, for: userAccount)
         }
         catch (let error) {
             let err = error as! SecureStoreError
@@ -28,9 +36,16 @@ extension ServerEndpoints {
     }
     
     public func getSession() -> String? {
+        guard let data = getData() else {
+            return nil
+        }
+        return data[kSessionKey]
+    }
+    
+    public func getData() -> [AnyHashable: String]? {
         do {
-            let sessionKey = try self.secureStore.getValue(for: userAccount)
-            return sessionKey
+            let data = try self.secureStore.getValue(for: userAccount)
+            return data
         }
         catch (let error) {
             let err = error as! SecureStoreError
