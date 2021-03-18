@@ -1,6 +1,11 @@
 
 import Foundation
 
+public protocol Response {
+    var result: String { get }
+    var error: CashCoreError? { get }
+}
+
 public struct BaseResponse: Response, Codable {
     public let result: String
     public let error: CashCoreError?

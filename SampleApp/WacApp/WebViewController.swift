@@ -5,7 +5,7 @@ import CashCore
 
 class WebViewController: UIViewController, WKUIDelegate {
     
-    var client: ServerEndpoints!
+    var client: CashCore!
     @IBOutlet var webView: WKWebView!
     private var urlComponents: URLComponents {
         var urlComponents = URLComponents()

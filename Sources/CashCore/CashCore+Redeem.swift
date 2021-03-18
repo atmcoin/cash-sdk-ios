@@ -2,7 +2,7 @@
 import Foundation
 
 // MARK: Redeem Flow
-extension ServerEndpoints {
+extension CashCore {
     
     public func createCashCode(_ atmId: String, _ amount: String, _ verificationCode: String, result: @escaping (Result<CashCodeResponse, CashCoreError>) -> Void) {
         let params = ["atm_id": atmId,

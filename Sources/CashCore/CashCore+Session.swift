@@ -1,57 +1,19 @@
 
 import Foundation
 
-private let userAccount = "CNI"
-
-
-public let kFirstName = "firstName"
-public let kLastName = "lastName"
-public let kPhoneNumber = "phoneNumber"
-public let kEmail = "email"
-public let kSessionKey = "sessionKey"
+public protocol SessionCallback {
+    func onSessionCreated(_ sessionKey: String)
+    func onError(_ error: CashCoreError?)
+}
 
 // MARK: Session
-extension ServerEndpoints {
-    
-    public func setSession(for object: [AnyHashable: String]) {
-        do {
-            var dict = object
-            dict.updateValue(self.sessionKey, forKey: kSessionKey)
-            try self.secureStore.setValue(dict, for: userAccount)
-        }
-        catch (let error) {
-            let err = error as! SecureStoreError
-            print("Error: \(String(describing: err.errorDescription))")
-        }
-    }
-    
-    public func removeSession() {
-        do {
-            try self.secureStore.removeValue(for: userAccount)
-        }
-        catch (let error) {
-            let err = error as! SecureStoreError
-            print("Error: \(String(describing: err.errorDescription))")
-        }
-    }
+extension CashCore {
     
     public func getSession() -> String? {
-        guard let data = getData() else {
+        guard let data = secureStore.getData() else {
             return nil
         }
         return data[kSessionKey]
-    }
-    
-    public func getData() -> [AnyHashable: String]? {
-        do {
-            let data = try self.secureStore.getValue(for: userAccount)
-            return data
-        }
-        catch (let error) {
-            let err = error as! SecureStoreError
-            print("Error: \(String(describing: err.errorDescription))")
-            return nil
-        }
     }
     
     public func hasSession() -> Bool {
@@ -59,6 +21,28 @@ extension ServerEndpoints {
             return false
         }
         return true
+    }
+    
+    public func removeSession() {
+        guard var data = secureStore.getData() else {
+            return
+        }
+        data[kSessionKey] = ""
+        secureStore.setData(for: data)
+    }
+    
+    public func handleSessionExpiry(_ error: CashCoreError, completion: @escaping (()-> Void)) {
+        // On session expiry - error code 105:
+        //  1. get a session key through guest login
+        //  2. login with phone number - Do not do for now
+        //  3. confirm with code - Do not do for now
+        
+        // If session expires, we can only renew a guest session. Logout to remove keychain session
+        self.logout() { [weak self] _ in
+            self?.createSession(self?.listener) { _ in
+                completion()
+            }
+        }
     }
     
 }

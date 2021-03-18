@@ -2,16 +2,15 @@
 import Foundation
 
 // MARK: KYC
-extension ServerEndpoints {
+extension CashCore {
 
     public func register(first name: String, surname last: String, phone number: String, result: @escaping(Result<BaseResponse, CashCoreError>) -> Void) {
         let params: [String : Any] = ["first_name": name,
                                       "last_name": last,
                                       "phone_number": number]
         
-        self.userData = [kFirstName: name,
-                         kLastName: last,
-                         kPhoneNumber: number]
+        let usr = CoreUser(firstName: name, lastName: last, phone: number)
+        add(user: usr)
         
         requestManager.request(KYC.register,
                                body: params,
@@ -93,7 +92,7 @@ extension ServerEndpoints {
 }
 
 // MARK: Support Pages
-extension ServerEndpoints {
+extension CashCore {
     
     public func loadJson(fileName: String, bundle: Bundle? = nil) {
         let decoder = JSONDecoder()

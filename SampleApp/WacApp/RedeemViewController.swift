@@ -4,7 +4,7 @@ import CashCore
 
 class RedeemViewController: UIViewController {
     
-    public var client: ServerEndpoints!
+    public var client: CashCore!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -50,7 +50,24 @@ class RedeemViewController: UIViewController {
             self.showAlert("Error", message: "Please create a session under the redemption view")
         } else {
             toggleViewsAfterLogin(true)
+            guard let user = client.user else {
+                return
+            }
+            toggleTextFieldInteractions(false, with: user)
+            self.sendButton.isEnabled = true
         }
+    }
+    
+    func toggleTextFieldInteractions(_ enabled: Bool, with user: CoreUser) {
+        self.firstNameTextField.isUserInteractionEnabled = enabled
+        self.lastNameTextField.isUserInteractionEnabled = enabled
+        self.telephoneTextField.isUserInteractionEnabled = enabled
+        self.emailTextField.isUserInteractionEnabled = enabled
+        
+        self.firstNameTextField.text = user.firstName
+        self.lastNameTextField.text = user.lastName
+        self.telephoneTextField.text = user.phoneNumber
+        self.emailTextField.text = user.email
     }
     
     func toggleViewsAfterLogin(_ enabled: Bool) {

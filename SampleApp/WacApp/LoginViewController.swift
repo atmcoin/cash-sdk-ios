@@ -4,7 +4,7 @@ import CashCore
 
 class LoginViewController: UIViewController {
     
-    public var client: ServerEndpoints!
+    public var client: CashCore!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var sessionKeyLabel: UILabel!
@@ -26,6 +26,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        updateButtons()
+        
         // Observe keyboard change
         NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector:#selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -39,15 +41,20 @@ class LoginViewController: UIViewController {
         self.phoneNumberTextfield.text = enabled ? "" : data![kPhoneNumber]
         self.firstNameTextField.text = enabled ? "" : data![kFirstName]
         self.lastNameTextField.text = enabled ? "" : data![kLastName]
+        
+        self.sessionKeyLabel.text = ""
+    }
+    
+    private func updateButtons() {
+        self.statusLabel.text = ""
+        self.registerButton.isEnabled = false
+        self.loginConfirmationButton.isEnabled = false
+        self.statusButton.isEnabled = false
+        self.logoutButton.isEnabled = false
     }
     
     private func updateUI() {
         if client.hasSession() {
-            guard let data = client.getData() else {
-                return
-            }
-            setTextFieldsInteraction(enabled: false, data: data)
-            
             self.sessionButton.setTitle("Get Session", for: .normal)
             self.registerButton.setTitle("Login", for: .normal)
             self.registerButton.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
@@ -59,13 +66,6 @@ class LoginViewController: UIViewController {
             self.registerButton.setTitle("Register", for: .normal)
             self.registerButton.addTarget(self, action: #selector(registerButtonPressed), for: .touchUpInside)
         }
-        
-        self.sessionKeyLabel.text = ""
-        self.statusLabel.text = ""
-        self.registerButton.isEnabled = false
-        self.loginConfirmationButton.isEnabled = false
-        self.statusButton.isEnabled = false
-        self.logoutButton.isEnabled = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -132,6 +132,7 @@ class LoginViewController: UIViewController {
             switch result {
             case .success(_):
                 self?.updateUI()
+                self?.updateButtons()
                 break
             case .failure(let error):
                 self?.showAlert("Error", message: (error.message)!)
@@ -202,8 +203,14 @@ extension LoginViewController: SessionCallback {
     // Login Protocol Implementation
     
     func onSessionCreated(_ sessionKey: String) {
-        print(sessionKey)
         self.sessionKeyLabel.text = sessionKey
+        
+        guard let data = client.secureStore.getData() else {
+            return
+        }
+        setTextFieldsInteraction(enabled: false, data: data)
+        self.registerButton.isEnabled = true
+        self.logoutButton.isEnabled = true
     }
     
     func onError(_ error: CashCoreError?) {

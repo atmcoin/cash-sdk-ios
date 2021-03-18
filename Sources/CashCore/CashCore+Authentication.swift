@@ -2,7 +2,7 @@
 import Foundation
 
 // MARK: Authentication
-extension ServerEndpoints {
+extension CashCore {
     
     public func createSession(_ listener: SessionCallback?, result: @escaping (Result<GuestLoginResponse, CashCoreError>) -> Void = { _ in }) {
         if listener != nil {
@@ -11,8 +11,12 @@ extension ServerEndpoints {
         
         // If I have a session stored on keychain, return it
         if hasSession() {
-            self.sessionKey = getSession()!
-            listener?.onSessionCreated(self.sessionKey)
+            if let data = secureStore.getData() {
+                self.user = CoreUser.user(from: data)
+                    
+                self.sessionKey = data[kSessionKey]!
+                listener?.onSessionCreated(self.sessionKey)
+            }
             return
         }
         requestManager.request(Authentication.guestLogin,
@@ -89,8 +93,15 @@ extension ServerEndpoints {
                         result(.failure(error))
                     }
                     else {
-                        self?.setSession(for: (self?.userData)!)
-                        result(.success(response))
+                        do {
+                            try self?.update(user: (self?.user)!)
+                            result(.success(response))
+                        }
+                        catch (_) {
+//                            let err = CashCoreError(code: "", message: (exception as! SecureStoreError).errorDescription)
+//                            result(.failure(err))
+                            return
+                        }
                     }
                 }
                 break

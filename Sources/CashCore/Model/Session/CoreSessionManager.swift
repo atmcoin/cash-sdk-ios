@@ -14,12 +14,12 @@ public class CoreSessionManager {
     }()
     
     public var delegate: CoreSessionManagerDelegate?
-    public var client: ServerEndpoints? = nil
+    public var client: CashCore? = nil
     
     public init() {}
     
     public func start(url: EnvironmentUrl = .Production) {
-        client = ServerEndpoints.init(url: url)
+        client = CashCore.init(url: url)
         
         client!.createSession(self)
         CoreTransactionManager.startPolling()

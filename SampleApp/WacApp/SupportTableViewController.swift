@@ -5,7 +5,7 @@ import CashCore
 
 class SupportTableViewController: UITableViewController {
     
-    public var client: ServerEndpoints!
+    public var client: CashCore!
     private var selectedIndexPath: IndexPath?
     
     override func awakeFromNib() {

@@ -8,7 +8,7 @@ class TabBarViewController: UITabBarController {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let client = ServerEndpoints.init(url: .Staging)
+        let client = CashCore.init(url: .Staging)
         
         var navController = self.viewControllers?.first as! UINavigationController
         let loginController = navController.topViewController as! LoginViewController
