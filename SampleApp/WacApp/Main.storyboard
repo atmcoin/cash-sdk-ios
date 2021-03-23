@@ -944,8 +944,20 @@
                             <constraint firstItem="ztR-gW-w7h" firstAttribute="bottom" secondItem="PkT-Qb-N0U" secondAttribute="bottom" id="thU-UY-XHq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Login" id="kBX-D9-4Zo"/>
+                    <navigationItem key="navigationItem" title="Login" id="kBX-D9-4Zo">
+                        <barButtonItem key="leftBarButtonItem" title="Profile" id="7HW-jC-zqW">
+                            <connections>
+                                <action selector="showProfile:" destination="Tvv-xX-ZzK" id="zNv-qp-B8C"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Remove" id="LOp-b1-ejl">
+                            <connections>
+                                <action selector="removeData:" destination="Tvv-xX-ZzK" id="uxQ-VP-wpu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="emailTextField" destination="Mez-ZU-TC3" id="P7J-WO-6qK"/>
                         <outlet property="firstNameTextField" destination="eM1-Ok-jD1" id="16j-0L-64K"/>
                         <outlet property="lastNameTextField" destination="bPi-GP-gSv" id="FxB-W4-xmR"/>
                         <outlet property="loginConfirmationButton" destination="PG6-BF-HCG" id="fxN-aa-ozV"/>

@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet var phoneNumberTextfield: UITextField!
+    @IBOutlet var emailTextField: UITextField!
     @IBOutlet var registerButton: UIButton!
     @IBOutlet var logoutButton: UIButton!
     
@@ -26,6 +27,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        updateUI()
         updateButtons()
         
         // Observe keyboard change
@@ -33,16 +35,27 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector:#selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    private func setTextFieldsInteraction(enabled: Bool, data: [AnyHashable: String]?) {
-        self.phoneNumberTextfield.isUserInteractionEnabled = enabled
-        self.firstNameTextField.isUserInteractionEnabled = enabled
-        self.lastNameTextField.isUserInteractionEnabled = enabled
-        
-        self.phoneNumberTextfield.text = enabled ? "" : data![kPhoneNumber]
-        self.firstNameTextField.text = enabled ? "" : data![kFirstName]
-        self.lastNameTextField.text = enabled ? "" : data![kLastName]
-        
-        self.sessionKeyLabel.text = ""
+    private func changeTextField(_ textField: UITextField, enabled: Bool) {
+        textField.isUserInteractionEnabled = enabled
+        textField.textColor = enabled ? .black : UIColor.init(white: 0.4, alpha: 1.0)
+    }
+    
+    private func setTextFieldsInteraction(enabled: Bool) {
+        changeTextField(phoneNumberTextfield, enabled: enabled)
+        changeTextField(firstNameTextField, enabled: enabled)
+        changeTextField(lastNameTextField, enabled: enabled)
+        changeTextField(emailTextField, enabled: enabled)
+    }
+    
+    private func setUserData() {
+        guard let data = client.secureStore.getData() else {
+            return
+        }
+        let user = CoreUser.user(from: data)
+        self.phoneNumberTextfield.text = user.phoneNumber
+        self.firstNameTextField.text = user.firstName
+        self.lastNameTextField.text = user.lastName
+        self.emailTextField.text = user.email
     }
     
     private func updateButtons() {
@@ -56,11 +69,13 @@ class LoginViewController: UIViewController {
     private func updateUI() {
         if client.hasSession() {
             self.sessionButton.setTitle("Get Session", for: .normal)
-            self.registerButton.setTitle("Login", for: .normal)
+            self.registerButton.setTitle("Connect", for: .normal)
             self.registerButton.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
+            
+            setUserData()
         }
         else {
-            setTextFieldsInteraction(enabled: true, data: nil)
+            setTextFieldsInteraction(enabled: true)
             
             self.sessionButton.setTitle("Create Session", for: .normal)
             self.registerButton.setTitle("Register", for: .normal)
@@ -68,15 +83,28 @@ class LoginViewController: UIViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        updateUI()
-    }
-    
     @IBAction func createSession(_ sender: Any) {
         let listener = self
         client.createSession(listener)
+    }
+    
+    private func cleanup() {
+        sessionKeyLabel.text = ""
+        verificationCodeTextfield.text = ""
+        statusLabel.text = ""
+    }
+    
+    @IBAction func removeData(_ sender: Any) {
+        client.secureStore.removeData()
+        cleanup()
+        
+        firstNameTextField.text = ""
+        lastNameTextField.text = ""
+        emailTextField.text = ""
+        phoneNumberTextfield.text = ""
+        
+        updateUI()
+        updateButtons()
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
@@ -92,15 +120,18 @@ class LoginViewController: UIViewController {
         }
     }
     
+    @IBAction func showProfile(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let webViewController = storyboard.instantiateViewController(withIdentifier: "webViewController") as! WebViewController
+        webViewController.client = self.client
+        self.present(webViewController, animated: true, completion: nil)
+    }
+    
     @IBAction func loginConfirmationButtonPressed(_ sender: Any) {
         client.loginConfirmation(verification: verificationCodeTextfield.text!) { [weak self] (result) in
             switch result {
             case .success(_):
-                self?.statusButton.isEnabled = true
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let webViewController = storyboard.instantiateViewController(withIdentifier: "webViewController") as! WebViewController
-                webViewController.client = self?.client
-                self?.present(webViewController, animated: true, completion: nil)
+                self?.showProfile(sender)
                 break
             case .failure(let error):
                 self?.showAlert("Error", message: (error.message)!)
@@ -131,6 +162,7 @@ class LoginViewController: UIViewController {
         client.logout() { [weak self] result in
             switch result {
             case .success(_):
+                self?.cleanup()
                 self?.updateUI()
                 self?.updateButtons()
                 break
@@ -205,12 +237,13 @@ extension LoginViewController: SessionCallback {
     func onSessionCreated(_ sessionKey: String) {
         self.sessionKeyLabel.text = sessionKey
         
-        guard let data = client.secureStore.getData() else {
-            return
-        }
-        setTextFieldsInteraction(enabled: false, data: data)
+        setTextFieldsInteraction(enabled: !client.hasSession())
+        setUserData()
         self.registerButton.isEnabled = true
-        self.logoutButton.isEnabled = true
+        self.statusButton.isEnabled = true
+        if client.hasSession() {
+            self.logoutButton.isEnabled = true
+        }
     }
     
     func onError(_ error: CashCoreError?) {
