@@ -73,15 +73,16 @@ extension CashCore {
                     completion(.notValid(message: "Error: kyc/status items was nil"))
                     return
                 }
-                if documents.getKYCDocumentsStatus() == KYCDocumentsStatus.new {
+                let documentStatus = documents.getKYCState()
+                if documentStatus == KYCState.new {
                     completion(.notVerified)
                     return
                 }
-                if documents.getKYCDocumentsStatus() == KYCDocumentsStatus.verified {
+                if documentStatus == KYCState.verified {
                     completion(.verified)
                     return
                 }
-                if documents.getKYCDocumentsStatus() == KYCDocumentsStatus.rejected {
+                if documentStatus == KYCState.rejected {
                     completion(.rejected)
                     return
                 }

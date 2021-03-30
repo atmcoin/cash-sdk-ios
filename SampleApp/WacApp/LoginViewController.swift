@@ -174,8 +174,8 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func getStatusButtonPressed(_ sender: Any) {
-//        client.getUserStatus() { [weak self] status in
-        client.getUserStatusSimplified() { [weak self] status in
+        client.getUserStatus() { [weak self] status in
+//        client.getUserStatusSimplified() { [weak self] status in
             self?.statusLabel.text = status.statusDescription
         }
     }
